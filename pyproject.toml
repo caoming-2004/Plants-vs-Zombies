@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pvz-mini-game"
+version = "0.2.0"
+description = "Offline playable lawn defense prototype"
+requires-python = ">=3.12,<3.13"
+dependencies = ["pygame-ce>=2.5,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9", "pyinstaller>=6,<7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--basetemp=.tools/pytest-temp"

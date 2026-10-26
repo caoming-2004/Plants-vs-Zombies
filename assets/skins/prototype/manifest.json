@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "skin_id": "prototype",
+  "display_name": "US1 程序绘制原型（非原版素材）",
+  "renderer": "pvz_game.presentation.renderer.Renderer",
+  "source_refs": ["prototype-code-art", "noto-sans-sc"],
+  "roles": ["sunflower", "peashooter", "zombie_basic"],
+  "release_scope": "US1 only; no classic or dog skin fidelity claim"
+}

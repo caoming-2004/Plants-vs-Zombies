@@ -1,0 +1,41 @@
+{
+  "sha256": "942d13b0ba0247af0884a98fc65ba7bd9a3e3b986acb3c42099e052622dd2e0b",
+  "platform": "nt",
+  "python_in_child_path": false,
+  "proxy_points_to_unreachable_local_port": true,
+  "caveat": "Not an OS-level network block or a clean VM; headless SDL smoke, not mouse gameplay",
+  "relocated_directory": ".tools/试玩 目录检查 v0.2.0",
+  "combinations": [
+    {
+      "plant": "default",
+      "zombie": "default",
+      "exit_code": 0,
+      "screenshot": "bundle-default-default.png"
+    },
+    {
+      "plant": "dogs",
+      "zombie": "default",
+      "exit_code": 0,
+      "screenshot": "bundle-dogs-default.png"
+    },
+    {
+      "plant": "default",
+      "zombie": "dogs",
+      "exit_code": 0,
+      "screenshot": "bundle-default-dogs.png"
+    },
+    {
+      "plant": "dogs",
+      "zombie": "dogs",
+      "exit_code": 0,
+      "screenshot": "bundle-dogs-dogs.png"
+    },
+    {
+      "plant": "dogs",
+      "zombie": "dogs",
+      "scene": "skin_menu",
+      "exit_code": 0,
+      "screenshot": "bundle-dog-menu.png"
+    }
+  ]
+}

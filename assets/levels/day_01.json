@@ -1,0 +1,17 @@
+{
+  "id":"day_01", "rows":5, "cols":12, "sun_schedule":[],
+  "spawn_schedule":[
+    {"tick":1200,"row":0,"type_id":"zombie_basic"},
+    {"tick":2100,"row":1,"type_id":"zombie_basic"},
+    {"tick":3000,"row":2,"type_id":"zombie_basic"},
+    {"tick":3900,"row":3,"type_id":"zombie_basic"},
+    {"tick":4800,"row":4,"type_id":"zombie_basic"},
+    {"tick":5700,"row":0,"type_id":"zombie_basic"},
+    {"tick":6600,"row":1,"type_id":"zombie_basic"},
+    {"tick":7500,"row":2,"type_id":"zombie_basic"},
+    {"tick":8400,"row":3,"type_id":"zombie_basic"},
+    {"tick":9300,"row":4,"type_id":"zombie_basic"},
+    {"tick":10200,"row":0,"type_id":"zombie_basic"},
+    {"tick":11100,"row":1,"type_id":"zombie_basic"}
+  ]
+}

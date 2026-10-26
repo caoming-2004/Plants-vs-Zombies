@@ -1,0 +1,21 @@
+{
+  "schema_version": 1, "tick_hz": 60, "initial_sun": 150,
+  "sun_value": 25, "sun_lifetime_ticks": 600, "natural_sun_interval_ticks": 600,
+  "mower_speed": 600, "mower_trigger_x": 72, "failure_x": 34,
+  "canvas_width": 1050, "canvas_height": 600,
+  "min_window_width": 1050, "min_window_height": 600,
+  "grid_x": 105, "grid_y": 160, "cell_width": 72, "cell_height": 76,
+  "spawn_x": 1010, "zombie_radius": 18, "projectile_radius": 6, "sun_radius": 24,
+  "plant_types": [
+    {"id":"sunflower", "name":"向日葵", "price":50, "hp":300, "cooldown_ticks":450,
+     "role":"producer", "production_interval_ticks":1440, "sun_value":25},
+    {"id":"peashooter", "name":"豌豆射手", "price":100, "hp":300, "cooldown_ticks":450,
+     "role":"shooter", "attack_interval_ticks":90, "projectile_speed":300, "damage":20},
+    {"id":"wallnut", "name":"坚果墙", "price":50, "hp":1200, "cooldown_ticks":1800,
+     "role":"blocker"},
+    {"id":"jalapeno", "name":"火爆辣椒", "price":125, "cooldown_ticks":3000,
+     "role":"row_clearer"}
+  ],
+  "zombie_types":[{"id":"zombie_basic", "hp":200, "speed":12, "bite_damage":20,
+                   "bite_interval_ticks":60, "contact_distance":33}]
+}
