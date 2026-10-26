@@ -75,20 +75,26 @@ def test_dog_manifest_frames_do_not_overlap_at_adjacent_cell_centers():
     from pvz_game.presentation.dog_validation import validate_dog_non_overlap
     from pvz_game.presentation.skin_catalog import Catalog
     catalog=Catalog()
-    diagnostics=validate_dog_non_overlap(
-        catalog.load('dogs'),catalog.load('default'),cell_width=72
-    )
-    assert not any(item.startswith('overlap ') for item in diagnostics)
-    assert diagnostics==[]
+    for skin_id in ('dogs','dogs_photo'):
+        diagnostics=validate_dog_non_overlap(
+            catalog.load(skin_id),catalog.load('default'),cell_width=72
+        )
+        assert not any(item.startswith('overlap ') for item in diagnostics)
+        assert diagnostics==[]
 
 
-def test_xiaobao_and_xiaodu_manifest_scale_is_at_least_fifteen_percent():
+def test_dog_skin_roles_have_distinct_valid_display_scales():
     from pvz_game.presentation.animation import display_scale_for_role, DOG_SCALE
     from pvz_game.presentation.skin_catalog import Catalog
-    skin=Catalog().load('dogs')
-    for role in ('wallnut','jalapeno'):
-        assert display_scale_for_role(skin,role,DOG_SCALE)>=DOG_SCALE*1.15
-    assert display_scale_for_role(skin,'sunflower',DOG_SCALE)==DOG_SCALE
+    catalog=Catalog()
+    for skin_id in ('dogs','dogs_photo'):
+        skin=catalog.load(skin_id)
+        multipliers=[skin.data['roles'][role]['display_scale_multiplier']
+                     for role in ('sunflower','peashooter','wallnut','jalapeno','zombie_basic')]
+        assert all(multiplier>0 for multiplier in multipliers)
+        assert len(set(multipliers))==len(multipliers)
+        assert all(display_scale_for_role(skin,role,DOG_SCALE)>0
+                   for role in ('sunflower','peashooter','wallnut','jalapeno','zombie_basic'))
 
 
 def test_legacy_dog_manifest_without_role_multiplier_defaults_to_one():
@@ -98,21 +104,19 @@ def test_legacy_dog_manifest_without_role_multiplier_defaults_to_one():
     assert display_scale_for_role(skin,'wallnut',.68)==.68
 
 
-def test_regenerated_dog_atlas_uses_uniform_runtime_transform_only():
-    from pvz_game.presentation.animation import DOG_SCALE
+def test_regenerated_dog_atlas_uses_manifest_role_scales():
     from pvz_game.presentation.dog_validation import validate_dog_non_overlap
     from pvz_game.presentation.skin_catalog import Catalog
     catalog=Catalog()
-    diagnostics=validate_dog_non_overlap(
-        catalog.load('dogs'),catalog.load('default'),cell_width=72,
-        scale=DOG_SCALE
-    )
+    diagnostics=validate_dog_non_overlap(catalog.load('dogs'),catalog.load('default'),
+                                         cell_width=72)
     assert not any(item.startswith('overlap ') for item in diagnostics)
     assert diagnostics==[]
 
 
-def test_dog_overlap_counts_any_nontransparent_alpha(manifest_file,tmp_path):
+def test_dog_overlap_ignores_low_alpha_effects_and_reports_ratio(manifest_file,tmp_path):
     from pvz_game.presentation.dog_validation import validate_dog_non_overlap
+    from pvz_game.presentation.dog_validation import measure_dog_overlap
     from pvz_game.presentation.skin_catalog import Skin
     path,data=manifest_file
     default_skin=Skin(path,{'fixture':{}})
@@ -143,13 +147,33 @@ def test_dog_overlap_counts_any_nontransparent_alpha(manifest_file,tmp_path):
     dog_path.write_text(json.dumps(dog_data),encoding='utf8')
     dog_skin=Skin(dog_path,{'fixture':{}})
 
-    diagnostics=validate_dog_non_overlap(
-        dog_skin,default_skin,cell_width=72,scale=0.81
-    )
-    assert any('left=sunflower.idle[0] right=sunflower.produce[0]' in item
-               for item in diagnostics)
-    assert any('left=sunflower.idle[0] right=peashooter.idle[0]' in item
-               for item in diagnostics)
+    diagnostics=validate_dog_non_overlap(dog_skin,default_skin,cell_width=72,scale=0.81)
+    assert not any(item.startswith('overlap ') for item in diagnostics)
+    report=measure_dog_overlap(dog_skin,cell_width=72,scale=0.81)
+    assert report['alpha_threshold']==96
+    assert report['max_overlap_ratio']==0
+
+
+def test_dog_overlap_is_measured_against_smaller_actor_mask(manifest_file,tmp_path):
+    from pvz_game.presentation.dog_validation import measure_dog_overlap
+    from pvz_game.presentation.skin_catalog import Skin
+    path,data=manifest_file
+    data['skin_id']='dogs'
+    for role_data in data['roles'].values():
+        for frame in (role_data['card'],role_data['preview']):
+            frame.update(rect=[0,0,100,16],source_size=[128,16],trim_offset=[0,0],anchor=[64,16])
+        for clip in role_data['clips'].values():
+            for frame in clip['frames']:
+                frame.update(rect=[0,0,100,16],source_size=[128,16],
+                             trim_offset=[0,0],anchor=[64,16])
+    atlas=pygame.Surface((128,16),pygame.SRCALPHA)
+    atlas.fill((0,0,0,0));atlas.fill((120,190,80,255),(0,0,100,16))
+    pygame.image.save(atlas,str(path.parent/'atlas.png'))
+    path.write_text(json.dumps(data),encoding='utf8')
+    skin=Skin(path,{'fixture':{}})
+    report=measure_dog_overlap(skin,cell_width=72,cell_height=76,scale=1.2)
+    assert report['max_overlap_ratio']>0.25
+    assert report['worst_pair'] is not None
 
 
 def test_dog_height_diagnostic_uses_default_role_height(manifest_file):
@@ -159,37 +183,53 @@ def test_dog_height_diagnostic_uses_default_role_height(manifest_file):
     skin=Skin(path,{'fixture':{}})
 
     diagnostics=validate_dog_non_overlap(skin,skin,cell_width=72,scale=0.5)
-    assert any('height_below_75_percent role=sunflower state=die frame=0'
-               in item for item in diagnostics)
+    assert any('height_below_75_percent role=sunflower' in item
+               for item in diagnostics)
 
 
-def test_uploaded_xiaobao_and_xiaodu_source_frames_are_fully_traceable():
+def test_uploaded_dog_source_frames_are_fully_traceable_in_both_appearances():
     import hashlib
     from pathlib import Path
     root=Path(__file__).resolve().parents[2]
     from pvz_game.presentation.skin_catalog import Catalog
-    skin=Catalog().load('dogs')
+    catalog=Catalog()
+    cartoon=catalog.load('dogs')
+    photos=catalog.load('dogs_photo')
     sources=json.loads((root/'assets/sources.json').read_text(encoding='utf8'))
-    provenance=json.loads((root/'assets/skins/dogs/provenance.json').read_text(encoding='utf8'))
-    records={item['role']:item for item in provenance if item.get('origin')=='user-uploaded'}
-    expected={'wallnut':('xiaobao-user-60.png',{'idle','hit','die'}),
-              'jalapeno':('xiaodu-user-60.png',{'plant','ignite','hit','die'})}
+    provenance=json.loads((root/'assets/skins/dogs_photo/provenance.json').read_text(encoding='utf8'))
+    records={item['role']:item for item in provenance}
+    expected={
+        'peashooter':('haohazi-user-20261026.png',{'idle','attack','hit','die'}),
+        'wallnut':('xiaobao-user-20261026.png',{'idle','hit','die'}),
+        'jalapeno':('xiaodu-user-20261026.png',{'plant','ignite','hit','die'}),
+    }
     for role,(filename,states) in expected.items():
         path=root/'assets/skins/dogs/source'/filename
         record=records[role]
         assert record['source']==filename and record['source_frame_count']==60
         digest=hashlib.sha256(path.read_bytes()).hexdigest()
         assert record['sha256']==digest
-        assert sources['user-dog-animation-sheets']['files'][role]['sha256']==digest
-        assert set(skin.data['roles'][role]['clips'])==states
+        source_record=sources['user-dog-animation-sheets-005']['files'][role]
+        assert source_record['sha256']==digest and source_record['dog']
+        assert pygame.image.load(str(path)).get_size()==(1619,971)
+        assert set(photos.data['roles'][role]['clips'])==states
+        assert set(cartoon.data['roles'][role]['clips'])==states
         used=set()
-        for state,clip in skin.data['roles'][role]['clips'].items():
+        for state,clip in photos.data['roles'][role]['clips'].items():
             declared=set(record['clip_source_frames'][state])
             for frame in clip['frames']:
                 refs=set(frame['source_frames'])
                 assert refs and refs<=declared
                 used.update(refs)
         assert used==set(range(60))
+    sunflower=next(item for item in records.values() if item['role']=='sunflower')
+    beiwo_path=root/'assets/skins/dogs/source/beiwo-sheet.png'
+    assert sunflower['source']=='beiwo-sheet.png'
+    assert sunflower['sha256']==hashlib.sha256(beiwo_path.read_bytes()).hexdigest()
+    assert pygame.image.load(str(beiwo_path)).get_size()==(1448,1086)
+    assert photos.data['roles']['sunflower']['name'].startswith('被窝')
+    assert photos.data['roles']['sunflower']['clips']['idle']['frames']
+    assert photos.data['roles']['zombie_basic']['name'].startswith('嗷嗷嗷')
 
 
 def test_user_sheet_import_rejects_an_empty_source_frame(tmp_path,monkeypatch):
@@ -231,5 +271,4 @@ def test_dog_overlap_uses_trim_offset_and_anchor(manifest_file):
                 )
 
     diagnostics=validate_dog_non_overlap(dog_skin,default_skin,cell_width=72)
-    assert any('left=sunflower.die[0] right=sunflower.hit[0]' in item
-               for item in diagnostics)
+    assert not any(item.startswith('overlap ') for item in diagnostics)

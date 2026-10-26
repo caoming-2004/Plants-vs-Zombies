@@ -48,8 +48,10 @@
     "source": "Built-in imagegen, 2026-10-26",
     "roles": [
       "sunflower",
-      "peashooter",
-      "zombie_basic"
+      "zombie_basic",
+      "wallnut",
+      "jalapeno",
+      "peashooter"
     ],
     "actions": [
       "idle",
@@ -64,12 +66,12 @@
     ],
     "version": "user-approved dog mapping 2026-10-25",
     "reference_time_range": "cartoon interpretations from user-approved mappings; no footage frame extraction",
-    "notes": "Generated cartoon artwork; Huanghuang, Xiaobao and Xiaodu are mapped by user instruction. Aoaoao uses red vest for zombie-side clarity. These assets do not claim photographic likeness.",
+    "notes": "Generated cartoon artwork; Haohazi replaces Huanghuang as peashooter, Xiaobao maps to wallnut, and Xiaodu maps to jalapeno. Aoaoao remains the red-vest zombie. These assets do not claim photographic likeness.",
     "reference_urls": [
       "https://www.douyin.com/video/7602901155340913962",
       "https://www.douyin.com/shipin/7642911662139476004"
     ],
-    "derivation": "Six-column, four-row 256px source sheets; fixed foot baseline and 2x pixel scale. The frames retain transparent source artwork in assets/skins/dogs/source."
+    "derivation": "Six-column, four-row 256px source sheets plus user-approved identity-based cartoon adaptations; fixed foot baseline and 2x pixel scale."
   },
   "classic-ui-extracted": {
     "source": "https://github.com/FregD156/PvZ_Assets",
@@ -104,11 +106,13 @@
   "user-dog-animation-sheets": {
     "source": "User-uploaded PNG sprite sheets",
     "roles": [
+      "peashooter",
       "wallnut",
       "jalapeno"
     ],
     "actions": [
       "idle",
+      "attack",
       "hit",
       "die",
       "plant",
@@ -116,30 +120,130 @@
     ],
     "version": "2026-10-26",
     "files": {
+      "sunflower": {
+        "path": "skins/dogs/source/beiwo-sheet.png",
+        "sha256": "5decf541f15737c0212621fc8f8cd3b384af3a621846bffe174aac39d9065e8e",
+        "frames": 12,
+        "layout": "4 columns x 3 rows"
+      },
       "wallnut": {
-        "path": "skins/dogs/source/xiaobao-user-60.png",
-        "sha256": "7b65976dd793f8342e0175563257ad1c9150399a7d443f0342f42e8d03889669",
+        "path": "skins/dogs/source/xiaobao-user-20261026.png",
+        "sha256": "326712d394c3361572514396d1c7e6c8b42c9d482f8e42df2b8153f7931b36b3",
         "frames": 60,
         "layout": "10 columns x 6 rows"
       },
       "jalapeno": {
-        "path": "skins/dogs/source/xiaodu-user-60.png",
-        "sha256": "7cbd824db491cc6113b465d81b26663ba3821514e3d50aa2c1d50437fbbc36e2",
+        "path": "skins/dogs/source/xiaodu-user-20261026.png",
+        "sha256": "c93a5dae90cccbab8537c217e32730ff92981940da1e53b9e86d402d9f78ff7b",
+        "frames": 60,
+        "layout": "10 columns x 6 rows"
+      },
+      "peashooter": {
+        "path": "skins/dogs/source/haohazi-user-20261026.png",
+        "sha256": "1780e40ea790f3e9272d3e7f781067c38d20ee47395ba17d7dfd04d67d95b0c2",
         "frames": 60,
         "layout": "10 columns x 6 rows"
       }
     },
-    "notes": "Xiaobao is mapped to wallnut and Xiaodu to jalapeno. Source sheets are preserved unchanged; generated in-betweens identify their adjacent source frame indices."
+    "notes": "The updated 005 photo skin adds Haohazi as peashooter. Original source sheets are preserved unchanged; derived frames identify their source indexes."
   },
   "user-dog-animation-sheets-005": {
     "source": "User-uploaded transparent PNG pose sheets",
     "version": "2026-10-26",
     "layout": "10 columns x 6 rows; 1619 x 971 pixels",
     "files": {
-      "jalapeno": {"dog": "小杜", "path": "skins/dogs/source/xiaodu-user-20261026.png", "sha256": "c93a5dae90cccbab8537c217e32730ff92981940da1e53b9e86d402d9f78ff7b", "frames": 60},
-      "wallnut": {"dog": "小宝", "path": "skins/dogs/source/xiaobao-user-20261026.png", "sha256": "326712d394c3361572514396d1c7e6c8b42c9d482f8e42df2b8153f7931b36b3", "frames": 60},
-      "peashooter": {"dog": "好孩子", "path": "skins/dogs/source/haohazi-user-20261026.png", "sha256": "1780e40ea790f3e9272d3e7f781067c38d20ee47395ba17d7dfd04d67d95b0c2", "frames": 60}
+      "sunflower": {
+        "dog": "被窝",
+        "path": "skins/dogs/source/beiwo-sheet.png",
+        "sha256": "5decf541f15737c0212621fc8f8cd3b384af3a621846bffe174aac39d9065e8e",
+        "frames": 60,
+        "layout": "10 columns x 6 rows"
+      },
+      "wallnut": {
+        "dog": "小宝",
+        "path": "skins/dogs/source/xiaobao-user-20261026.png",
+        "sha256": "326712d394c3361572514396d1c7e6c8b42c9d482f8e42df2b8153f7931b36b3",
+        "frames": 60,
+        "layout": "10 columns x 6 rows"
+      },
+      "jalapeno": {
+        "dog": "小杜",
+        "path": "skins/dogs/source/xiaodu-user-20261026.png",
+        "sha256": "c93a5dae90cccbab8537c217e32730ff92981940da1e53b9e86d402d9f78ff7b",
+        "frames": 60,
+        "layout": "10 columns x 6 rows"
+      },
+      "peashooter": {
+        "dog": "好孩子",
+        "path": "skins/dogs/source/haohazi-user-20261026.png",
+        "sha256": "1780e40ea790f3e9272d3e7f781067c38d20ee47395ba17d7dfd04d67d95b0c2",
+        "frames": 60,
+        "layout": "10 columns x 6 rows"
+      }
     },
-    "derivation": "Original uploads remain unchanged. dogs_photo uses cleaned photo poses; dogs cartoon poses are generated with these identities as reference. Source-frame indexes are retained in each derived manifest."
+    "derivation": "dogs_photo uses cleaned photo poses; dogs uses a deterministic cartoon adaptation. Original PNG files remain unchanged."
+  },
+  "generated-background-005": {
+    "source": "Original project-authored procedural artwork",
+    "author": "Plants vs Zombies project contributors",
+    "license": "Project original artwork; no third-party source material",
+    "generator": "tools/generate_background.py",
+    "file": "skins/default/source/background-005.png",
+    "sha256": "ea74b50c499ee48327c2041fc11b6bd9b24f15ff022a7152c4cec33ce38aebbb",
+    "dimensions": [
+      2800,
+      1200
+    ],
+    "roles": [
+      "background",
+      "lawn",
+      "house",
+      "road"
+    ],
+    "derivation": "Deterministic 2x pixel-resolution pygame drawing generated by tools/generate_background.py",
+    "adaptation": "Custom house, fence, sidewalk, road and detailed lawn; maintains the 12x5 playable lawn footprint"
+  },
+  "generated-dog-cartoon-005": {
+    "source": "Deterministic local adaptation of user-uploaded animation sheets",
+    "version": "2026-10-26",
+    "roles": [
+      "peashooter",
+      "wallnut",
+      "jalapeno"
+    ],
+    "derivation": "Frames are reduced to 64x64, color-quantized and enlarged with nearest-neighbor sampling; original source-frame indexes remain in dogs/provenance.json.",
+    "files": {
+      "wallnut": {
+        "path": "skins/dogs/source/xiaobao-cartoon-20261026.png",
+        "sha256": "4b5954776c33e432c887530028434ac580e0b866aad14cccdf56387d2a882dbe",
+        "layout": "10 columns x 6 rows; 256px cells",
+        "derived_from": "xiaobao-user-20261026.png"
+      },
+      "jalapeno": {
+        "path": "skins/dogs/source/xiaodu-cartoon-20261026.png",
+        "sha256": "9676812d3298a78c9f82169eef64ddeb2c96659eba9e5de77b7c043dffd0cc27",
+        "layout": "10 columns x 6 rows; 256px cells",
+        "derived_from": "xiaodu-user-20261026.png"
+      },
+      "peashooter": {
+        "path": "skins/dogs/source/haohazi-cartoon-20261026.png",
+        "sha256": "06e2d9855a428c4891b7aa850d0bdd2bf8215becf54f63feb1b6afb64fbd4a76",
+        "layout": "10 columns x 6 rows; 256px cells",
+        "derived_from": "haohazi-user-20261026.png"
+      }
+    },
+    "notes": "The original uploaded sheets are preserved unchanged; this is a stylized cartoon treatment, not a claim of hand-drawn or photographic artwork."
+  },
+  "beiwo-photo-cartoon-source": {
+    "source": "Preserved local user-provided cartoon sprite sheet",
+    "file": "skins/dogs/source/beiwo-sheet.png",
+    "sha256": "5decf541f15737c0212621fc8f8cd3b384af3a621846bffe174aac39d9065e8e",
+    "dimensions": [
+      1448,
+      1086
+    ],
+    "layout": "4 columns x 3 rows",
+    "role": "dogs_photo sunflower",
+    "derivation": "Imported with a dedicated 4x3 path; original gold scarf and source PNG remain unchanged."
   }
 }

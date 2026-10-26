@@ -43,13 +43,13 @@
 
 ### Tests for User Story 1
 
-- [ ] T007 [US1] 在 `tests/integration/test_background_layout.py` 验证 1050×600 逻辑网格的原点、格宽高和背景可视区域在替换后不变，缩放窗口后的输入命中位置仍对应原格。
+- [X] T007 [US1] 在 `tests/integration/test_background_layout.py` 验证 1050×600 逻辑网格的原点、格宽高和背景可视区域在替换后不变，缩放窗口后的输入命中位置仍对应原格。
 
 ### Implementation for User Story 1
 
-- [ ] T008 [P] [US1] 在 `assets/skins/default/source/` 保存可核查授权的高细节背景原件或组成素材，并在 `assets/sources.json` 记录作者、链接、许可、必要署名、SHA-256 与改编方式；不采用许可不明的游戏截图。
-- [ ] T009 [US1] 在 `assets/skins/default/ui-background.jpg` 制作保留原房屋、道路、12×5 草坪布局的高清本地背景，并在 `assets/skins/default/manifest.json` 指向该资源；检查真实细节，不能仅插值放大旧 JPEG。
-- [ ] T010 [US1] 在 `src/pvz_game/presentation/renderer.py` 调整背景装配与缓存，使新图在逻辑画布及三种窗口尺寸下不变形，并保留现有交互网格绘制和角色对比度。
+- [X] T008 [P] [US1] 在 `assets/skins/default/source/` 保存可核查授权的高细节背景原件或组成素材，并在 `assets/sources.json` 记录作者、链接、许可、必要署名、SHA-256 与改编方式；不采用许可不明的游戏截图。
+- [X] T009 [US1] 在 `assets/skins/default/ui-background.jpg` 制作保留原房屋、道路、12×5 草坪布局的高清本地背景，并在 `assets/skins/default/manifest.json` 指向该资源；检查真实细节，不能仅插值放大旧 JPEG。
+- [X] T010 [US1] 在 `src/pvz_game/presentation/renderer.py` 调整背景装配与缓存，使新图在逻辑画布及三种窗口尺寸下不变形，并保留现有交互网格绘制和角色对比度。
 - [ ] T011 [US1] 在 `docs/validation/005/background.md` 附1050×600、1260×720、1920×1080同场景新旧截图，按原始像素尺寸逐项记录房屋边缘、草坪格线、道路纹理、角色对比度通过/失败，以及许可、离线启动、种植/收集命中和 `tests/integration/test_background_layout.py` 的实际结果。
 
 **Checkpoint**: US1 可独立展示高清背景，输入和玩法坐标不变。
@@ -64,19 +64,19 @@
 
 ### Tests for User Story 2
 
-- [ ] T012 [US2] 在 `tests/integration/test_asset_manifest.py` 增加 `dogs_photo` 完整性、三张60帧源表顺序、好孩子→peashooter映射、被窝源文件必须为 `assets/skins/dogs/source/beiwo-sheet.png`、嗷嗷嗷复用及缺失资源整套回退的验证。
-- [ ] T013 [P] [US2] 在 `tests/integration/test_animation.py` 与 `tests/integration/test_skin_selection.py` 覆盖照片/卡通双外观完整 clip、12–18 姿势/秒、小杜 35 姿势 2 秒清行、菜单选择及规则回放一致性。
+- [X] T012 [US2] 在 `tests/integration/test_asset_manifest.py` 增加 `dogs_photo` 完整性、三张60帧源表顺序、好孩子→peashooter映射、被窝源文件必须为 `assets/skins/dogs/source/beiwo-sheet.png`、嗷嗷嗷复用及缺失资源整套回退的验证。
+- [X] T013 [P] [US2] 在 `tests/integration/test_animation.py` 与 `tests/integration/test_skin_selection.py` 覆盖照片/卡通双外观完整 clip、12–18 姿势/秒、小杜 35 姿势 2 秒清行、菜单选择及规则回放一致性。
 
 ### Implementation for User Story 2
 
-- [ ] T014 [US2] 在 `tools/import_dog_assets.py` 扩展既有 10×6 导入流程，对 `xiaodu-user-20261026.png`、`xiaobao-user-20261026.png`、`haohazi-user-20261026.png` 按身份和动作分段清理杂点/串色、稳定脚底锚点并保留 `source_frames`，从同一源表分别构建照片版所需 clip。
-- [ ] T015 [US2] 在 `assets/skins/dogs/source/` 制作三只狗的新卡通动作素材并记录与原始照片动作表的对应关系；在 `tools/import_dog_assets.py` 为1448×1086、4列×3行的已有 `beiwo-sheet.png` 单独导入12个灰白毛源姿势并映射 idle、produce、hit、die，保留原表金色围巾和原件；嗷嗷嗷保持原卡通造型。
-- [ ] T016 [US2] 在 `tools/import_dog_assets.py` 生成更新后的 `assets/skins/dogs/manifest.json`、图集和 `assets/skins/dogs/provenance.json`，将好孩子替换黄黄为豌豆射手，并让照片/卡通两版所有 `REQUIRED` 动作完整可见。
-- [ ] T017 [US2] 在 `assets/skins/dogs_photo/manifest.json` 与图集创建完整照片皮肤，三只用户狗取新照片动作，`sunflower` 复用 `beiwo-sheet.png` 灰白毛卡通源、`zombie_basic` 复用原卡通源；生成器在 `tools/import_dog_assets.py` 保持可重复构建。
-- [ ] T018 [US2] 在 `src/pvz_game/presentation/skin_catalog.py`、`src/pvz_game/presentation/input.py`、`src/pvz_game/presentation/scenes.py`、`src/pvz_game/presentation/renderer.py` 和 `src/pvz_game/app.py` 接入进入游戏前的第三种植物外观选择、预览、命令行选择与完整皮肤回退，保留僵尸经典/狗狗选择。
-- [ ] T019 [US2] 在 `assets/skins/dogs/manifest.json`、`assets/skins/dogs_photo/manifest.json` 设置各角色唯一显示倍率，并在 `src/pvz_game/presentation/animation.py` 与 `src/pvz_game/presentation/renderer.py` 复用现有锚点/倍率路径，覆盖草坪、卡片、拖动、死亡与菜单预览。
-- [ ] T020 [US2] 在 `src/pvz_game/presentation/dog_validation.py` 对两种狗狗皮肤所有必需姿态生成透明度≥96的主体掩码，排除独立火焰/光效，以相邻格/行掩码交集像素数÷较小掩码面积计算最坏遮挡率≤25%；另检查头部可辨、脚底和裁切，以结果调整T019倍率，不改玩法坐标。
-- [ ] T021 [US2] 在 `docs/validation/005/dogs.md` 保存两版所有角色和动作预览、身份核对、遮挡率、来源映射与 default/dogs/dogs_photo 玩法重放结果。
+- [X] T014 [US2] 在 `tools/import_dog_assets.py` 扩展既有 10×6 导入流程，对 `xiaodu-user-20261026.png`、`xiaobao-user-20261026.png`、`haohazi-user-20261026.png` 按身份和动作分段清理杂点/串色、稳定脚底锚点并保留 `source_frames`，从同一源表分别构建照片版所需 clip。
+- [X] T015 [US2] 在 `assets/skins/dogs/source/` 制作三只狗的新卡通动作素材并记录与原始照片动作表的对应关系；在 `tools/import_dog_assets.py` 为1448×1086、4列×3行的已有 `beiwo-sheet.png` 单独导入12个灰白毛源姿势并映射 idle、produce、hit、die，保留原表金色围巾和原件；嗷嗷嗷保持原卡通造型。
+- [X] T016 [US2] 在 `tools/import_dog_assets.py` 生成更新后的 `assets/skins/dogs/manifest.json`、图集和 `assets/skins/dogs/provenance.json`，将好孩子替换黄黄为豌豆射手，并让照片/卡通两版所有 `REQUIRED` 动作完整可见。
+- [X] T017 [US2] 在 `assets/skins/dogs_photo/manifest.json` 与图集创建完整照片皮肤，三只用户狗取新照片动作，`sunflower` 复用 `beiwo-sheet.png` 灰白毛卡通源、`zombie_basic` 复用原卡通源；生成器在 `tools/import_dog_assets.py` 保持可重复构建。
+- [X] T018 [US2] 在 `src/pvz_game/presentation/skin_catalog.py`、`src/pvz_game/presentation/input.py`、`src/pvz_game/presentation/scenes.py`、`src/pvz_game/presentation/renderer.py` 和 `src/pvz_game/app.py` 接入进入游戏前的第三种植物外观选择、预览、命令行选择与完整皮肤回退，保留僵尸经典/狗狗选择。
+- [X] T019 [US2] 在 `assets/skins/dogs/manifest.json`、`assets/skins/dogs_photo/manifest.json` 设置各角色唯一显示倍率，并在 `src/pvz_game/presentation/animation.py` 与 `src/pvz_game/presentation/renderer.py` 复用现有锚点/倍率路径，覆盖草坪、卡片、拖动、死亡与菜单预览。
+- [X] T020 [US2] 在 `src/pvz_game/presentation/dog_validation.py` 对两种狗狗皮肤所有必需姿态生成透明度≥96的主体掩码，排除独立火焰/光效，以相邻格/行掩码交集像素数÷较小掩码面积计算最坏遮挡率≤25%；另检查头部可辨、脚底和裁切，以结果调整T019倍率，不改玩法坐标。
+- [X] T021 [US2] 在 `docs/validation/005/dogs.md` 保存两版所有角色和动作预览、身份核对、遮挡率、来源映射与 default/dogs/dogs_photo 玩法重放结果。
 
 **Checkpoint**: 两种狗狗外观都可完整游玩，照片与卡通身份清晰，动作和规则保持一致。
 
@@ -90,7 +90,7 @@
 
 ### Tests for User Story 3
 
-- [ ] T022 [US3] 在 `tests/integration/test_playable_loop.py` 和 `tests/replay/test_skin_invariance.py` 验证优化前后 60Hz 规则事件、角色推进、资源、胜负及小杜清行时序一致；性能指标仍以实机证据判定。
+- [X] T022 [US3] 在 `tests/integration/test_playable_loop.py` 和 `tests/replay/test_skin_invariance.py` 验证优化前后 60Hz 规则事件、角色推进、资源、胜负及小杜清行时序一致；性能指标仍以实机证据判定。
 
 ### Implementation for User Story 3
 
@@ -107,9 +107,9 @@
 
 **Purpose**: 综合回归并交付可玩的离线发行包。
 
-- [ ] T027 [P] 在 `docs/validation/005/automated.md` 记录 `.venv/Scripts/python.exe -m pytest -q` 与 `.venv/Scripts/python.exe tools/validate_assets.py` 的命令和实际结果，并修复影响本功能的失败。
+- [X] T027 [P] 在 `docs/validation/005/automated.md` 记录 `.venv/Scripts/python.exe -m pytest -q` 与 `.venv/Scripts/python.exe tools/validate_assets.py` 的命令和实际结果，并修复影响本功能的失败。
 - [ ] T028 在 `docs/validation/005/release.md` 记录 `tools/build.ps1`、`tools/verify_bundle.py`、经典/卡通/照片三种外观离线启动、完整核心循环、暂停/重开和不同窗口试玩的实际结果，失败不得标为通过。
-- [ ] T029 在 `README.md`、`docs/art/dog-mapping.md` 与 `assets/sources.json` 更新好孩子、`beiwo-sheet.png` 灰白毛被窝、双外观选择、背景许可与离线资源说明，删除旧“黄黄豌豆射手”当前映射描述。
+- [X] T029 在 `README.md`、`docs/art/dog-mapping.md` 与 `assets/sources.json` 更新好孩子、`beiwo-sheet.png` 灰白毛被窝、双外观选择、背景许可与离线资源说明，删除旧“黄黄豌豆射手”当前映射描述。
 
 ## Dependencies & Execution Order
 

@@ -10,16 +10,6 @@
     "inbetween_method": "pixel-space linear interpolation"
   },
   {
-    "role": "peashooter",
-    "source": "huanghuang-sheet.png",
-    "sha256": "c0d32b0ef67959c6947215aa79a96b666857ceb92d9bd678d1fa31a4df9b833e",
-    "generation": "Built-in imagegen, 2026-10-26",
-    "pixel_scale": 2,
-    "actor_scale": 1.05,
-    "authored_key_poses": 24,
-    "inbetween_method": "pixel-space linear interpolation"
-  },
-  {
     "role": "zombie_basic",
     "source": "aoao-red-sheet-hd.png",
     "sha256": "223664a5571c28f2342d3c963a03f8484b8640de416553f98db571990083bc2e",
@@ -31,8 +21,8 @@
   },
   {
     "role": "wallnut",
-    "source": "xiaobao-user-60.png",
-    "sha256": "7b65976dd793f8342e0175563257ad1c9150399a7d443f0342f42e8d03889669",
+    "source": "xiaobao-user-20261026.png",
+    "sha256": "326712d394c3361572514396d1c7e6c8b42c9d482f8e42df2b8153f7931b36b3",
     "source_frame_count": 60,
     "source_layout": "10 columns x 6 rows",
     "clip_source_frames": {
@@ -103,18 +93,20 @@
         59
       ]
     },
-    "inbetween_method": "alpha blend between adjacent authored poses; each output frame lists source_frames",
+    "inbetween_method": "pixelated color-quantized cartoon adaptation; every output frame lists original source_frames",
     "pixel_scale": 2,
     "anchor": [
       128,
       232
     ],
-    "origin": "user-uploaded"
+    "origin": "stylized-user-upload",
+    "derived_source": "xiaobao-cartoon-20261026.png",
+    "derived_sha256": "4b5954776c33e432c887530028434ac580e0b866aad14cccdf56387d2a882dbe"
   },
   {
     "role": "jalapeno",
-    "source": "xiaodu-user-60.png",
-    "sha256": "7cbd824db491cc6113b465d81b26663ba3821514e3d50aa2c1d50437fbbc36e2",
+    "source": "xiaodu-user-20261026.png",
+    "sha256": "c93a5dae90cccbab8537c217e32730ff92981940da1e53b9e86d402d9f78ff7b",
     "source_frame_count": 60,
     "source_layout": "10 columns x 6 rows",
     "clip_source_frames": {
@@ -187,12 +179,100 @@
         59
       ]
     },
-    "inbetween_method": "alpha blend between adjacent authored poses; each output frame lists source_frames",
+    "inbetween_method": "pixelated color-quantized cartoon adaptation; every output frame lists original source_frames",
     "pixel_scale": 2,
     "anchor": [
       128,
       232
     ],
-    "origin": "user-uploaded"
+    "origin": "stylized-user-upload",
+    "derived_source": "xiaodu-cartoon-20261026.png",
+    "derived_sha256": "9676812d3298a78c9f82169eef64ddeb2c96659eba9e5de77b7c043dffd0cc27"
+  },
+  {
+    "role": "peashooter",
+    "source": "haohazi-user-20261026.png",
+    "sha256": "1780e40ea790f3e9272d3e7f781067c38d20ee47395ba17d7dfd04d67d95b0c2",
+    "source_frame_count": 60,
+    "source_layout": "10 columns x 6 rows",
+    "clip_source_frames": {
+      "idle": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "attack": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "hit": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49
+      ],
+      "die": [
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ]
+    },
+    "inbetween_method": "pixelated color-quantized cartoon adaptation; every output frame lists original source_frames",
+    "pixel_scale": 2,
+    "anchor": [
+      128,
+      232
+    ],
+    "origin": "stylized-user-upload",
+    "derived_source": "haohazi-cartoon-20261026.png",
+    "derived_sha256": "06e2d9855a428c4891b7aa850d0bdd2bf8215becf54f63feb1b6afb64fbd4a76"
   }
 ]

@@ -14,7 +14,7 @@ def main():
     catalog=Catalog()
     default_skin=catalog.load('default')
     config,_=load()
-    for name in ('default','dogs'):
+    for name in ('default','dogs','dogs_photo'):
         skin=catalog.load(name,refresh=True)
         if name=='default':
             for key in ('background','menu','seedbank','mower','shovel','shovelbank','sun','projectile','card_sunflower','card_peashooter'):
@@ -22,7 +22,7 @@ def main():
         else:
             diagnostics=validate_dog_non_overlap(skin,default_skin)
             if diagnostics:
-                raise AssetError('狗狗相邻帧轮廓验证失败：\n'+'\n'.join(diagnostics))
+                raise AssetError('狗狗主体尺寸或相邻遮挡验证失败：\n'+'\n'.join(diagnostics))
         count=0
         for role,states in REQUIRED.items():
             for state in states:
@@ -31,7 +31,7 @@ def main():
                 duration=sum(frame['duration_ticks'] for frame in frames)
                 unique=len({pygame.image.tobytes(skin.surface(frame),'RGBA') for frame in frames})
                 rate=pose_rate_hz(unique,duration,config['tick_hz'])
-                if name=='dogs' and role=='jalapeno' and state=='ignite':
+                if name in ('dogs','dogs_photo') and role=='jalapeno' and state=='ignite':
                     refs=[frame.get('source_frames') for frame in frames]
                     if len(frames)!=35 or refs!=[[i] for i in range(10,45)]:
                         raise AssetError('dogs/jalapeno/ignite must contain the 35 ordered authored source poses')

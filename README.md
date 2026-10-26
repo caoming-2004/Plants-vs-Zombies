@@ -1,6 +1,6 @@
-# 植物大战僵尸小游戏 · v0.2.0 换肤试玩
+# 植物大战僵尸小游戏 · v0.2.0
 
-当前已实现默认角色帧与门头沟小狗外观。本次更新将阳光余额移到左上角，支持植物卡/铲子拖放，并接入用户提供的小宝、小杜60帧动作图。
+离线草坪防守游戏，提供经典素材、狗狗卡通和狗狗照片三种植物外观。支持鼠标拖放、暂停、重开和 60Hz 固定逻辑模拟。
 
 ## 运行
 
@@ -8,8 +8,9 @@
 保留 `_internal` 和所有资源。无需Python、管理员权限或联网下载。
 版本化历史包 `dist/PvzMiniGame-v0.2.0-windows-x64.zip` 保留；执行最终构建时会更新通用发行包。
 
-主菜单“选择外观”可分别为植物方和进攻方切换经典/小狗模式：
-向日葵→被窝（金围巾），射手→黄黄（绿背心），坚果墙→小宝，火爆辣椒→小杜，进攻方→嗷嗷嗷（红背心）。
+主菜单“选择外观”可为植物方选择经典、狗狗卡通或狗狗照片；进攻方可选择经典或狗狗卡通。
+狗狗植物映射为向日葵→被窝（金围巾）、豌豆射手→好孩子、坚果墙→小宝、火爆辣椒→小杜；
+照片版被窝和僵尸嗷嗷嗷复用原卡通素材。角色和来源详情见[角色映射](docs/art/dog-mapping.md)及素材清单 `assets/sources.json`。
 仅开局前切换，重开保留选择，关闭游戏后不保存。损坏小狗资源会提示并整套回退对应阵营。
 
 玩法：左上角查看阳光余额，点击草坪金色阳光收集；点击或拖动四张植物卡种植；点击铲子再点植物，或直接将铲子拖到植物上移除（不退款）；右键/Esc取消拖动或选择；空格暂停/继续。坚果墙阻挡僵尸，火爆辣椒清除本行现存僵尸。
@@ -29,11 +30,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/build.ps1
 ```
 
 `tools/benchmark.py` 默认测量60秒压力场景；SDL dummy数据不能替代Windows实机性能与发行验收。拖放P95需在真实窗口执行`.venv/Scripts/python.exe tools/benchmark.py --input-latency --seconds 60`，并在测量期间实际拖动。
+在真实窗口测固定负载可用 `.venv/Scripts/python.exe tools/benchmark.py --window --scene standard --seconds 60`；
+将植物外观设为 `dogs_photo` 可测照片版资源。阶段帧间隔和设备信息写入 `--output` 指定的 JSON。
 
 动画预览按空格换外观，Esc退出；`--export docs/validation/animations` 导出动作条带。
 逐帧图集、原始生成图、来源清单都随包保留，运行不读取网络。
 
-原版布局/节奏的严格一致性与小狗最终造型审核仍未通过全部验收，不将功能可用或测试通过等同这些要求已完成。Windows实机、持续运行与新手试玩尚未全部执行。
+高清背景与照片/卡通皮肤的本地生成器分别为 `tools/generate_background.py` 和 `tools/import_dog_assets.py`；
+两者都只使用仓库本地素材，不在运行时联网。Windows 实机性能、真实交互反馈、构建发行和人工视觉验收仍须按
+[005 背景验收](docs/validation/005/background.md)、[狗狗素材验收](docs/validation/005/dogs.md)及
+[性能验收](docs/validation/005/performance.md)记录，不能将自动测试视为这些实机项目已通过。
 详见 [默认视觉记录](docs/validation/default-visuals.md)、[小狗验证记录](docs/validation/dog-visuals.md)、
 [角色映射](docs/art/dog-mapping.md) 与 [生成提示词](docs/art/generation-prompts.md)。
 

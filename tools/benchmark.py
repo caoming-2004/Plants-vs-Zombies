@@ -74,7 +74,12 @@ def benchmark(seconds):
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--seconds',type=float,default=60)
-    parser.add_argument('--input-latency',action='store_true',help='open the game for a real mouse drag latency measurement')
+    parser.add_argument('--input-latency',action='store_true',help='measure verified real plant, shovel and sun actions')
+    parser.add_argument('--window',action='store_true',help='measure the actual display and presentation path')
+    parser.add_argument('--scene',choices=('standard','pressure'),default='pressure')
+    parser.add_argument('--plant-skin',choices=('default','dogs','dogs_photo'),default='dogs')
+    parser.add_argument('--zombie-skin',choices=('default','dogs'),default='dogs')
+    parser.add_argument('--output',type=Path)
     args=parser.parse_args()
     if args.seconds<=0:parser.error('--seconds must be positive')
     if args.input_latency:
@@ -88,6 +93,12 @@ def main():
         if report is None:raise SystemExit('No input latency report was produced.')
         if json.loads(report).get('status')!='PASS':raise SystemExit('Real-window latency sample set is incomplete or above target.')
         return
+    if args.window:
+        command=[sys.executable,'-m','pvz_game','--benchmark-scene',args.scene,
+             '--seconds',str(args.seconds),'--benchmark-plant-skin',args.plant_skin,
+             '--benchmark-zombie-skin',args.zombie_skin]
+        if args.output:command.extend(['--benchmark-output',str(args.output.resolve())])
+        raise SystemExit(subprocess.run(command,cwd=ROOT).returncode)
     startup=cold_start_seconds()
     result=benchmark(args.seconds)
     result.update(startup_seconds=round(startup,3),machine=platform.platform(),

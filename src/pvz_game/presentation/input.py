@@ -111,7 +111,7 @@ def click(point, snapshot, config, help_open=False, button=1, skins_open=False):
         if skins_open:
             if hit('back_skins'): return 'close_skins'
             for side in ('plant','zombie'):
-                for skin in ('default','dogs'):
+                for skin in (('default','dogs','dogs_photo') if side=='plant' else ('default','dogs')):
                     if hit(side+'_'+skin):return 'choose_'+side+'_'+skin
             return None
         if help_open:

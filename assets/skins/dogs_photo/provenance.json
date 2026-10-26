@@ -1,0 +1,292 @@
+[
+  {
+    "role": "sunflower",
+    "source": "beiwo-sheet.png",
+    "sha256": "5decf541f15737c0212621fc8f8cd3b384af3a621846bffe174aac39d9065e8e",
+    "source_frame_count": 12,
+    "source_layout": "4 columns x 3 rows",
+    "clip_source_frames": {
+      "idle": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "produce": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "hit": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "die": [
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    "inbetween_method": "original source poses with anchored alpha-blended transitions",
+    "pixel_scale": 2,
+    "anchor": [
+      128,
+      232
+    ],
+    "origin": "preserved-cartoon-source"
+  },
+  {
+    "role": "wallnut",
+    "source": "xiaobao-user-20261026.png",
+    "sha256": "326712d394c3361572514396d1c7e6c8b42c9d482f8e42df2b8153f7931b36b3",
+    "source_frame_count": 60,
+    "source_layout": "10 columns x 6 rows",
+    "clip_source_frames": {
+      "idle": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "hit": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "die": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ]
+    },
+    "inbetween_method": "authored photo poses; output frames retain original source_frames",
+    "pixel_scale": 2,
+    "anchor": [
+      128,
+      232
+    ],
+    "origin": "user-uploaded"
+  },
+  {
+    "role": "jalapeno",
+    "source": "xiaodu-user-20261026.png",
+    "sha256": "c93a5dae90cccbab8537c217e32730ff92981940da1e53b9e86d402d9f78ff7b",
+    "source_frame_count": 60,
+    "source_layout": "10 columns x 6 rows",
+    "clip_source_frames": {
+      "plant": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "ignite": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "hit": [
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "die": [
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ]
+    },
+    "inbetween_method": "authored photo poses; output frames retain original source_frames",
+    "pixel_scale": 2,
+    "anchor": [
+      128,
+      232
+    ],
+    "origin": "user-uploaded"
+  },
+  {
+    "role": "peashooter",
+    "source": "haohazi-user-20261026.png",
+    "sha256": "1780e40ea790f3e9272d3e7f781067c38d20ee47395ba17d7dfd04d67d95b0c2",
+    "source_frame_count": 60,
+    "source_layout": "10 columns x 6 rows",
+    "clip_source_frames": {
+      "idle": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "attack": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "hit": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49
+      ],
+      "die": [
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ]
+    },
+    "inbetween_method": "authored photo poses; output frames retain original source_frames",
+    "pixel_scale": 2,
+    "anchor": [
+      128,
+      232
+    ],
+    "origin": "user-uploaded"
+  }
+]

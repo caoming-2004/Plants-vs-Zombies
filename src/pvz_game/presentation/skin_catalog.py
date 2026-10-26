@@ -11,6 +11,7 @@ REQUIRED = {
     'jalapeno': ('plant','ignite','hit','die'),
     'zombie_basic': ('walk','bite','hit','die'),
 }
+SKIN_IDS = ('default', 'dogs', 'dogs_photo')
 
 
 class AssetError(RuntimeError):
@@ -105,7 +106,7 @@ class Catalog:
         except AssetError as exc:raise AssetError('默认外观不可用，请完整解压资源。'+str(exc)) from exc
 
     def load(self,skin_id,refresh=False):
-        if skin_id not in ('default','dogs'):raise AssetError('未知皮肤')
+        if skin_id not in SKIN_IDS:raise AssetError('未知皮肤')
         if refresh or skin_id not in self.skins:
             self.skins[skin_id]=Skin(self.root/'skins'/skin_id/'manifest.json',self.sources)
         return self.skins[skin_id]
@@ -128,6 +129,9 @@ class AppearanceController:
 
     def select(self,side,skin_id,phase):
         if phase!='menu' or side not in ('plant','zombie'):return False
+        if skin_id not in (SKIN_IDS if side=='plant' else ('default','dogs')):
+            self.notice='该阵营不支持此外观。'
+            return False
         if not self.catalog.available(skin_id):
             self.notice='小狗外观未完整安装，请保留全部资源文件。'
             return False

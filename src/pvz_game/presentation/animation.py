@@ -36,12 +36,16 @@ def assign_clip_durations(frames,pose_signatures,tick_hz,loop):
 def display_scale_for_role(skin,role,base_scale=None):
     """Apply a role's manifest multiplier to a context-specific base scale."""
     if base_scale is None:base_scale=1.0
-    if skin.data.get('skin_id')!='dogs':
+    if skin.data.get('skin_id') not in ('dogs','dogs_photo'):
         return base_scale
     multiplier=skin.data['roles'][role].get('display_scale_multiplier',1.0)
     if isinstance(multiplier,bool) or not isinstance(multiplier,(int,float)) or not math.isfinite(multiplier) or multiplier<=0:
         raise ValueError(f'{role} display_scale_multiplier must be a positive finite number')
     return base_scale*multiplier
+
+
+def is_dog_skin(skin):
+    return skin.data.get('skin_id') in ('dogs','dogs_photo')
 
 @lru_cache(maxsize=256)
 def _scaled(image,size):
@@ -144,7 +148,7 @@ class Animator:
                 self.hits.pop(entity['id'],None)
         frame=frame_at(skin.clip(role,state),elapsed,cycle)
         blit_frame(target,skin,frame,position,
-                   display_scale_for_role(skin,role,DOG_SCALE if skin.data['skin_id']=='dogs' else 1))
+                   display_scale_for_role(skin,role,DOG_SCALE if is_dog_skin(skin) else 1))
         return frame
 
     def draw_deaths(self,target,tick,row_y):
@@ -156,7 +160,7 @@ class Animator:
             duration=sum(f['duration_ticks'] for f in clip['frames'])
             if age<duration:
                 blit_frame(target,skin,frame_at(clip,age),(death['x'],row_y(death['row'])+28),
-                           display_scale_for_role(skin,role,DOG_SCALE if skin.data['skin_id']=='dogs' else 1))
+                           display_scale_for_role(skin,role,DOG_SCALE if is_dog_skin(skin) else 1))
                 remaining.append(death)
         self.deaths=remaining
 
@@ -170,7 +174,7 @@ class Animator:
             if age>=duration:continue
             x=grid_x+(effect['col']+.5)*cell_width;y=row_y(effect['row'])+28
             blit_frame(target,skin,frame_at(clip,age),(x,y),
-                       display_scale_for_role(skin,role,DOG_SCALE if skin.data['skin_id']=='dogs' else 1))
+                       display_scale_for_role(skin,role,DOG_SCALE if is_dog_skin(skin) else 1))
             alpha=max(0,round(210*(1-age/duration)))
             band=pygame.Surface((board_width,40),pygame.SRCALPHA)
             band.fill((245,82,24,alpha//2))

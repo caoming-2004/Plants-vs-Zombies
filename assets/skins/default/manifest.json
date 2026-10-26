@@ -16725,14 +16725,7 @@
     }
   },
   "ui": {
-    "background": {
-      "rect": [
-        0,
-        0,
-        1400,
-        600
-      ]
-    },
+    "background": "ui-background.jpg",
     "menu": {
       "rect": [
         0,

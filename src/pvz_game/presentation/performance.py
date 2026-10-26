@@ -3,10 +3,13 @@ from __future__ import annotations
 
 import math
 
+from ..domain.models import Plant, Projectile, SunPickup, Zombie
+from ..domain.simulation import Simulation
+
 
 SCENES = {
-    "standard": dict(sunflowers=5, peashooters=5, zombies=5, projectiles=10, suns=3),
-    "pressure": dict(sunflowers=23, peashooters=22, zombies=30, projectiles=100, suns=20),
+    "standard": dict(sunflowers=5, peashooters=5, zombies=5, projectiles=10, suns=3, mowers=5),
+    "pressure": dict(sunflowers=23, peashooters=22, zombies=30, projectiles=100, suns=20, mowers=5),
 }
 
 
@@ -37,6 +40,53 @@ def make_scene(config, level, scene="pressure"):
                 mowers=[dict(row=row, x=45, previous_x=45, state="ready")
                         for row in range(5)], next_spawn_index=0,
                 total_spawns=len(level["spawn_schedule"]), kills=0)
+
+
+def make_simulation(config, level, scene="pressure"):
+    """Create a deterministic, fixed-load Simulation for isolated tick profiling."""
+    if scene not in SCENES:
+        raise ValueError(f"Unknown benchmark scene: {scene}")
+    counts = SCENES[scene]
+    game = Simulation(config, level)
+    game.phase = "playing"
+    game.next_spawn_index = len(game.spawns)
+    game.config["natural_sun_interval_ticks"] = 10**9
+    game.level["sun_schedule"] = []
+    game.sun = 1000
+    game._next_id = 0
+
+    plants = (["sunflower"] * counts["sunflowers"] +
+              ["peashooter"] * counts["peashooters"])
+    for index, role in enumerate(plants):
+        row, col = divmod(index, 9)
+        game._next_id += 1
+        game.plants[game._next_id] = Plant(
+            game._next_id, role, row, col, 10**9, 10**9
+        )
+
+    for index in range(counts["zombies"]):
+        game._next_id += 1
+        game.zombies[game._next_id] = Zombie(
+            game._next_id, "zombie_basic", index % 5, 10000 + index * 2, 10**9
+        )
+
+    shooters = [plant for plant in game.plants.values()
+                if plant.type_id == "peashooter"]
+    for index in range(counts["projectiles"]):
+        shooter = shooters[index % len(shooters)]
+        game._next_id += 1
+        game.projectiles[game._next_id] = Projectile(
+            game._next_id, shooter.id, index % 5, 350 + index % 8,
+            350 + index % 8, 1, .1, -1
+        )
+
+    for index in range(counts["suns"]):
+        game._next_id += 1
+        game.suns[game._next_id] = SunPickup(
+            game._next_id, 130 + index % 10 * 80, 170 + index % 5 * 72,
+            25, 10**9, 0
+        )
+    return game
 
 
 def summarize_frame_intervals(intervals_ms):

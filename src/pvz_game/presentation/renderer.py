@@ -3,7 +3,7 @@ import pygame
 from .prototype_renderer import Renderer as PrototypeRenderer, INK, CREAM, GOLD, GREEN
 from .skin_catalog import Catalog, AppearanceController
 from .animation import (Animator, frame_at, blit_frame, anchor_position_for_skin,
-                       DOG_SCALE, display_scale_for_role)
+                       DOG_SCALE, display_scale_for_role, is_dog_skin)
 from .scenes import BUTTONS, HUD_SUN_RECT, MESSAGES
 from ..config import LOGICAL_WIDTH, LOGICAL_HEIGHT
 
@@ -46,14 +46,16 @@ class Renderer(PrototypeRenderer):
             background=pygame.Surface((LOGICAL_WIDTH,LOGICAL_HEIGHT))
             background.fill((57,87,39))
             image=self.default.ui['background']
-            # Preserve source art; fit the lawn section to the already-validated US1 grid.
+            source_scale=image.get_width()/1400
             parts=[(0,0,250,600),(250,0,735,600),(985,0,415,600)]
             destinations=[(0,0,105,600),(105,0,864,600),(969,0,81,600)]
             for source,dest in zip(parts,destinations):
-                column=image.subsurface(source)
+                source_rect=pygame.Rect(*(round(value*source_scale) for value in source))
+                column=image.subsurface(source_rect)
                 if source[0]==250:
                     for sr,dr in [((0,0,735,90),(105,0,864,160)),((0,90,735,480),(105,160,864,380)),((0,570,735,30),(105,540,864,60))]:
-                        background.blit(pygame.transform.smoothscale(column.subsurface(sr),(dr[2],dr[3])),dr[:2])
+                        crop=pygame.Rect(*(round(value*source_scale) for value in sr))
+                        background.blit(pygame.transform.smoothscale(column.subsurface(crop),(dr[2],dr[3])),dr[:2])
                 else:background.blit(pygame.transform.smoothscale(column,(dest[2],dest[3])),dest[:2])
             grid=pygame.Surface((864,380),pygame.SRCALPHA)
             for col in range(1,12):
@@ -147,7 +149,7 @@ class Renderer(PrototypeRenderer):
                     px=self.config['grid_x']+(source['col']+.5)*self.config['cell_width']
                     mx,my=anchor_position_for_skin(
                         skin,emission,(px,self.row_y(source['row'])+28),
-                        scale=display_scale_for_role(skin,'peashooter',DOG_SCALE if skin.data['skin_id']=='dogs' else 1))
+                        scale=display_scale_for_role(skin,'peashooter',DOG_SCALE if is_dog_skin(skin) else 1))
                     self.shot_offsets[shot['id']]=(mx-(px+22),my-(self.row_y(source['row'])-15))
                 else:self.shot_offsets[shot['id']]=(0,0)
             dx,dy=self.shot_offsets[shot['id']]
@@ -170,7 +172,8 @@ class Renderer(PrototypeRenderer):
         elif snapshot['selection']['kind']=='plant':hint='植物已选中：点击空格种植，失败不会扣费。'
         self.text(hint,(120,550),13,INK)
         names=self.appearance.selection()
-        self.text('植物：'+('小狗' if names[0]=='dogs' else '经典')+'  /  进攻方：'+('小狗' if names[1]=='dogs' else '经典'),(114,579),12,CREAM)
+        labels={'default':'经典','dogs':'狗狗卡通','dogs_photo':'狗狗照片'}
+        self.text('植物：'+labels[names[0]]+'  /  进攻方：'+labels[names[1]],(114,579),12,CREAM)
         if message and message_time>0:
             self.rounded((178,130,494,28),(249,231,163),6)
             self.text(message,(425,143),14,(104,58,34),True)
@@ -205,7 +208,7 @@ class Renderer(PrototypeRenderer):
                 skin=self.appearance.skin_for(role)
                 frame=skin.data['roles'][role]['preview']
                 y=point[1] if drag_state.hover_cell is None else point[1]+28
-                base=DOG_SCALE if skin.data['skin_id']=='dogs' else .85
+                base=DOG_SCALE if is_dog_skin(skin) else .85
                 blit_frame(self.canvas,skin,frame,(point[0],y),
                            display_scale_for_role(skin,role,base),alpha=145)
         if drag_state.reason_code and drag_state.reason_code!='out_of_bounds' and not obscured:
@@ -251,11 +254,13 @@ class Renderer(PrototypeRenderer):
             self.text(name,(pos[0],label_y),13,GREEN,True)
         for side,x in [('plant',235),('zombie',585)]:
             selected=getattr(self.appearance,side+'_skin_id')
-            for skin_id,label in [('default','经典外观'),('dogs','小狗外观')]:
+            choices=(('default','经典外观'),('dogs','狗狗卡通'),('dogs_photo','狗狗照片')) if side=='plant' else (
+                ('default','经典外观'),('dogs','狗狗卡通'))
+            for skin_id,label in choices:
                 key=side+'_'+skin_id
                 self.button(key,('✓ ' if selected==skin_id else '')+label,selected==skin_id)
-                if skin_id=='dogs' and not self.catalog.available('dogs'):
-                    self.text('资源未就绪',(x+115,451),12,(144,65,40),True)
-        self.text('植物：被窝 / 黄黄 / 小宝 / 小杜  ·  进攻方：嗷嗷嗷（红背心）',(525,480),13,GREEN,True)
-        if self.appearance.notice:self.text(self.appearance.notice,(525,457),12,(144,65,40),True)
+                if skin_id!='default' and not self.catalog.available(skin_id):
+                    self.text('资源未就绪',(x+115,492 if skin_id=='dogs_photo' else 451),11,(144,65,40),True)
+        self.text('植物：被窝 / 好孩子 / 小宝 / 小杜  ·  进攻方：嗷嗷嗷',(525,495),12,GREEN,True)
+        if self.appearance.notice:self.text(self.appearance.notice,(525,505),12,(144,65,40),True)
         self.button('back_skins','完成，返回主菜单',True)

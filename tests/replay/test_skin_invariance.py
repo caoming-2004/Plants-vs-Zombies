@@ -43,5 +43,6 @@ def run_case(catalog,selection,case):
 def test_real_skin_combinations_have_identical_gameplay(case):
     catalog=Catalog()
     baseline=run_case(catalog,('default','default'),case)
-    for selected in [('dogs','default'),('default','dogs'),('dogs','dogs')]:
+    for selected in [('dogs','default'),('default','dogs'),('dogs','dogs'),
+                     ('dogs_photo','default')]:
         assert run_case(catalog,selected,case)==baseline
