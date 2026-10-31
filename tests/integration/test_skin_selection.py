@@ -71,3 +71,37 @@ def test_photo_skin_has_its_own_menu_selection_action():
     point=(rect[0]+rect[2]/2,rect[1]+rect[3]/2)
     result=click(point,{'phase':'menu'},load()[0],skins_open=True)
     assert result=='choose_plant_dogs_photo'
+
+
+def test_async_skin_choice_is_acknowledged_before_asset_decode(tmp_path,manifest_file,monkeypatch):
+    catalog=catalog_fixture(tmp_path,manifest_file)
+    ctrl=AppearanceController(catalog)
+    started=[]
+    monkeypatch.setattr(catalog,'preload_async',lambda skin_id:started.append(skin_id))
+    assert ctrl.select_async('plant','dogs_photo','menu')
+    assert started==['dogs_photo']
+    assert ctrl.selection()==('default','default')
+    assert ctrl.pending_for('plant')=='dogs_photo'
+    assert ctrl.notice
+    catalog.load('dogs_photo',refresh=True)
+    assert ctrl.poll_pending()
+    assert ctrl.selection()==('dogs_photo','default')
+
+
+def test_special_dog_plant_roles_are_shown_in_skin_menu(monkeypatch):
+    import pygame
+    from pvz_game.presentation.renderer import Renderer
+    pygame.font.init()
+    config,_=load();renderer=Renderer(config)
+    old_selection=renderer.appearance.selection()
+    drawn=[]
+    monkeypatch.setattr(renderer,'text',lambda value,*args,**kwargs:drawn.append(value))
+    renderer.skin_menu(0)
+    assert '胖宝宝·倭瓜' in drawn and '黄黄·寒冰射手' in drawn
+    for role in ('pangbaobao','huanghuang'):
+        rect=BUTTONS['role_preview_'+role]
+        point=(rect[0]+rect[2]/2,rect[1]+rect[3]/2)
+        result=click(point,{'phase':'menu'},config,skins_open=True)
+        assert result=='preview_role_'+role
+        assert renderer.focus_role_preview(role)
+    assert renderer.appearance.selection()==old_selection

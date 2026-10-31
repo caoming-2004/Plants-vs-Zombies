@@ -12,8 +12,8 @@ uv pip install --python .venv/Scripts/python.exe -r requirements.lock.txt
 uv pip install --python .venv/Scripts/python.exe --no-deps -e .
 .venv/Scripts/python.exe -m pvz_game
 .venv/Scripts/python.exe -m pytest -q
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/build.ps1 -Diagnostic
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/build.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File packaging/windows/build.ps1 -Diagnostic
+powershell -NoProfile -ExecutionPolicy Bypass -File packaging/windows/build.ps1
 ```
 
 沙箱环境可以将UV_CACHE_DIR和UV_PYTHON_INSTALL_DIR设为项目.tools/内目录。
@@ -47,6 +47,7 @@ smoke-play仅为开发验证创建展示局，普通启动没有调试资源或�
 ```powershell
 .venv/Scripts/python.exe tools/import_classic_assets.py
 .venv/Scripts/python.exe tools/import_dog_assets.py
+.venv/Scripts/python.exe tools/generate_backgrounds.py
 .venv/Scripts/python.exe tools/validate_assets.py
 .venv/Scripts/python.exe tools/preview_animations.py --export docs/validation/animations
 .venv/Scripts/python.exe tools/benchmark.py
@@ -56,11 +57,25 @@ classic导入器需要.tools/references/中已下载并记录提交的原始参�
 AI源图位于assets/skins/dogs/source，最终提示词与用户确认见docs/art。
 运行时只读取assets/skins/default与dogs，不需要AI工具或网络。
 
-最终构建输出版本化目录dist/PvzMiniGame-v0.2.0/与通用发行包dist/PvzMiniGame-windows-x64.zip；
-历史版本化ZIP不作为当前构建结果。
-构建前要求两套完整动作资源，不用prototype或缺失小狗资源通过构建。
-Windows PowerShell5读取UTF8脚本需要BOM，tools/build.ps1保存为UTF8 BOM以确保中文启动说明文件名正确。
+当前 Windows 构建输出为 `dist/windows/<版本目录>/`，中间文件位于 `build/windows/`，不会生成 ZIP。构建使用 `packaging/windows/` 中专属 spec、启动器和发行辅助文件；Android 文件在各自的 Android 目录。
 
 `tools/benchmark.py` 默认运行60秒，测量45植物、30僵尸、100投射物和20阳光的
 1050×600压力画面及冷启动时间。其SDL dummy帧率适合复现本机软件渲染负载，
 不能代替真实显示驱动及最终exe上的Windows验收。
+
+## v0.7.1 顶部 HUD、结算稳定与高清背景
+
+- 波次/关卡/下一波预告改为顶部 HUD 单行状态条，位于卡片下方、草坪上边界之前；移除草坪内预告面板和浮动公告。
+- 新增 `assets/backgrounds/`：日间/夜间/黄昏三套 2560×1440 真实感照片背景，主菜单“更换背景”立即应用；选择写入 progress 的 `settings.background_id`，旧 v1 自动迁移。
+- 背景源为 Wikimedia Commons 的 “Mona-lawn-dusk-Panorama1.jpg”（作者 Wiki ian，CC BY-SA 3.0），仅做裁切/色彩分级；作者、来源、授权、SHA-256 见 `assets/backgrounds/source/provenance.json`。运行时不联网。
+- 第一关结算增加真实胜利回归（20 次）和错误边界；结果/保存/下一关异常显示可恢复提示并保留返回菜单/重试。
+- 定向检查：`pytest tests/integration/test_hud_layout.py tests/integration/test_result_flow.py tests/unit/test_backgrounds.py tests/unit/test_campaign_progress.py -q`。
+- 背景构建：`.venv/Scripts/python.exe tools/generate_backgrounds.py`；资源校验：`.venv/Scripts/python.exe tools/validate_assets.py`。
+
+## v0.7.0 战役、无尽与流畅表现
+
+- 关卡数据在 `assets/levels/campaign.json` 与 `day_01.json`～`day_05.json`；`config.load()` 仍返回 day_01，`config.load_campaign()` 返回完整战役。
+- 进度写入 `%LOCALAPPDATA%\PvzMiniGame\progress.json`；损坏时回退 day_01。只保存解锁、最佳星级/时间和无尽记录，不保存外观。
+- 无尽模式由 `domain/endless.py` 的确定性导演追加波次，并限制同屏僵尸；通关 day_05 后解锁。
+- 狗狗完整轮廓由 `tools/import_dog_assets.py` 的整图连通轮廓路径生成；动作帧仍约 12 姿态/秒，表现层叠加 60Hz 次级动作。
+- 定向检查：`pytest tests/unit/test_campaign_config.py tests/unit/test_campaign_progress.py tests/unit/test_endless.py tests/integration/test_campaign_flow.py -q`；狗狗边界见 `quickstart.md`。

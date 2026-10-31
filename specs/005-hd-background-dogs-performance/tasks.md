@@ -50,7 +50,7 @@
 - [X] T008 [P] [US1] 在 `assets/skins/default/source/` 保存可核查授权的高细节背景原件或组成素材，并在 `assets/sources.json` 记录作者、链接、许可、必要署名、SHA-256 与改编方式；不采用许可不明的游戏截图。
 - [X] T009 [US1] 在 `assets/skins/default/ui-background.jpg` 制作保留原房屋、道路、12×5 草坪布局的高清本地背景，并在 `assets/skins/default/manifest.json` 指向该资源；检查真实细节，不能仅插值放大旧 JPEG。
 - [X] T010 [US1] 在 `src/pvz_game/presentation/renderer.py` 调整背景装配与缓存，使新图在逻辑画布及三种窗口尺寸下不变形，并保留现有交互网格绘制和角色对比度。
-- [ ] T011 [US1] 在 `docs/validation/005/background.md` 附1050×600、1260×720、1920×1080同场景新旧截图，按原始像素尺寸逐项记录房屋边缘、草坪格线、道路纹理、角色对比度通过/失败，以及许可、离线启动、种植/收集命中和 `tests/integration/test_background_layout.py` 的实际结果。
+- [X] T011 [US1] 在 `docs/validation/005/background.md` 附1050×600、1260×720、1920×1080同场景新旧截图，按原始像素尺寸逐项记录房屋边缘、草坪格线、道路纹理、角色对比度通过/失败，以及许可、离线启动、种植/收集命中和 `tests/integration/test_background_layout.py` 的实际结果。
 
 **Checkpoint**: US1 可独立展示高清背景，输入和玩法坐标不变。
 
@@ -94,8 +94,8 @@
 
 ### Implementation for User Story 3
 
-- [ ] T023 [US3] 在 `src/pvz_game/app.py` 和 `tools/benchmark.py` 对真实窗口打包版的事件处理、Simulation、Renderer、窗口缩放和 flip 分段计时，定位用户所见慢帧并记录到 `docs/validation/005/performance.md`。
-- [ ] T024 [US3] 在 `src/pvz_game/app.py`、`src/pvz_game/presentation/renderer.py` 与 `src/pvz_game/presentation/skin_catalog.py` 依据 T023 结果优化实际瓶颈，优先复用画布缩放结果、角色帧表面和静态 UI 缓存；不得减少 60Hz 玩法 tick 或丢弃必要动画姿势。
+- [X] T023 [US3] 在 `src/pvz_game/app.py` 和 `tools/benchmark.py` 对真实窗口打包版的事件处理、Simulation、Renderer、窗口缩放和 flip 分段计时，定位用户所见慢帧并记录到 `docs/validation/005/performance.md`。
+- [X] T024 [US3] 在 `src/pvz_game/app.py`、`src/pvz_game/presentation/renderer.py` 与 `src/pvz_game/presentation/skin_catalog.py` 依据 T023 结果优化实际瓶颈，优先复用画布缩放结果、角色帧表面和静态 UI 缓存；不得减少 60Hz 玩法 tick 或丢弃必要动画姿势。
 - [ ] T025 [US3] 在 `tools/benchmark.py` 与 `src/pvz_game/app.py` 加入至少 20 次真实拖放、铲除和阳光收集操作的可见反馈测量及结果核对，输出 P95 延迟与漏处理/重复处理数。
 - [ ] T026 [US3] 在 `docs/validation/005/performance.md` 记录当前电脑新打包版标准/压力场景各 60 秒平均 FPS、P95 帧间隔、最长连续 >50ms 帧数及 20 次操作 P95 延迟，与旧版同条件基线并列；未达到指标时继续定位并修复。
 

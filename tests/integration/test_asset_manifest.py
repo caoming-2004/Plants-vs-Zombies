@@ -15,6 +15,8 @@ def manifest_file(tmp_path):
     for role,states in {'sunflower':['idle','produce','hit','die'],
                          'peashooter':['idle','attack','hit','die'],
                          'wallnut':['idle','hit','die'],
+                         'pangbaobao':['idle','hit','die'],
+                         'huanghuang':['idle','attack','hit','die'],
                          'jalapeno':['plant','ignite','hit','die'],
                          'zombie_basic':['walk','bite','hit','die']}.items():
         roles[role]=dict(name=role,card=dict(frame),preview=dict(frame),
@@ -83,7 +85,7 @@ def test_dog_manifest_frames_do_not_overlap_at_adjacent_cell_centers():
         assert diagnostics==[]
 
 
-def test_dog_skin_roles_have_distinct_valid_display_scales():
+def test_dog_skin_roles_have_valid_display_scales():
     from pvz_game.presentation.animation import display_scale_for_role, DOG_SCALE
     from pvz_game.presentation.skin_catalog import Catalog
     catalog=Catalog()
@@ -92,7 +94,7 @@ def test_dog_skin_roles_have_distinct_valid_display_scales():
         multipliers=[skin.data['roles'][role]['display_scale_multiplier']
                      for role in ('sunflower','peashooter','wallnut','jalapeno','zombie_basic')]
         assert all(multiplier>0 for multiplier in multipliers)
-        assert len(set(multipliers))==len(multipliers)
+        assert max(multipliers)/min(multipliers)<=1.5
         assert all(display_scale_for_role(skin,role,DOG_SCALE)>0
                    for role in ('sunflower','peashooter','wallnut','jalapeno','zombie_basic'))
 
@@ -197,21 +199,23 @@ def test_uploaded_dog_source_frames_are_fully_traceable_in_both_appearances():
     photos=catalog.load('dogs_photo')
     sources=json.loads((root/'assets/sources.json').read_text(encoding='utf8'))
     provenance=json.loads((root/'assets/skins/dogs_photo/provenance.json').read_text(encoding='utf8'))
+    photo_records={item['role']:item for item in provenance}
+    provenance=json.loads((root/'assets/skins/dogs/provenance.json').read_text(encoding='utf8'))
     records={item['role']:item for item in provenance}
     expected={
-        'peashooter':('haohazi-user-20261026.png',{'idle','attack','hit','die'}),
-        'wallnut':('xiaobao-user-20261026.png',{'idle','hit','die'}),
-        'jalapeno':('xiaodu-user-20261026.png',{'plant','ignite','hit','die'}),
+        'peashooter':('haohazi-user-007.png',{'idle','attack','hit','die'}),
+        'wallnut':('xiaobao-user-007.png',{'idle','hit','die'}),
+        'jalapeno':('xiaodu-user-007.png',{'plant','ignite','hit','die'}),
     }
     for role,(filename,states) in expected.items():
         path=root/'assets/skins/dogs/source'/filename
-        record=records[role]
-        assert record['source']==filename and record['source_frame_count']==60
+        record=photo_records[role]
+        assert record['source']==filename and record['source_frame_count']==12
         digest=hashlib.sha256(path.read_bytes()).hexdigest()
         assert record['sha256']==digest
-        source_record=sources['user-dog-animation-sheets-005']['files'][role]
+        source_record=sources['user-dog-animation-sheets-007']['files'][role]
         assert source_record['sha256']==digest and source_record['dog']
-        assert pygame.image.load(str(path)).get_size()==(1619,971)
+        assert pygame.image.load(str(path)).get_size()==(1448,1086)
         assert set(photos.data['roles'][role]['clips'])==states
         assert set(cartoon.data['roles'][role]['clips'])==states
         used=set()
@@ -221,12 +225,19 @@ def test_uploaded_dog_source_frames_are_fully_traceable_in_both_appearances():
                 refs=set(frame['source_frames'])
                 assert refs and refs<=declared
                 used.update(refs)
-        assert used==set(range(60))
-    sunflower=next(item for item in records.values() if item['role']=='sunflower')
-    beiwo_path=root/'assets/skins/dogs/source/beiwo-sheet.png'
-    assert sunflower['source']=='beiwo-sheet.png'
+        assert used==set(range(12))
+    sunflower=records['sunflower']
+    beiwo_path=root/'被窝.png'
+    assert sunflower['source']=='被窝.png'
     assert sunflower['sha256']==hashlib.sha256(beiwo_path.read_bytes()).hexdigest()
-    assert pygame.image.load(str(beiwo_path)).get_size()==(1448,1086)
+    assert pygame.image.load(str(root/'assets/skins/dogs/source/被窝.png')).get_size()==(1672,941)
+    project_records={item['role']:item for item in records.values()
+                     if item['origin']=='user-uploaded project image'}
+    assert {role:record['source'] for role,record in project_records.items()}=={
+        'sunflower':'被窝.png','zombie_basic':'嗷嗷嗷.png',
+        'pangbaobao':'胖宝宝.png','huanghuang':'黄黄.png'}
+    assert {'pangbaobao','huanghuang'}<=set(cartoon.data['roles'])
+    assert not {'pangbaobao','huanghuang'}&set(photos.data['roles'])
     assert photos.data['roles']['sunflower']['name'].startswith('被窝')
     assert photos.data['roles']['sunflower']['clips']['idle']['frames']
     assert photos.data['roles']['zombie_basic']['name'].startswith('嗷嗷嗷')

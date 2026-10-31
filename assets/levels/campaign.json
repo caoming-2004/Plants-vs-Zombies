@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "stages": [
+    "day_01",
+    "day_02",
+    "day_03",
+    "day_04",
+    "day_05"
+  ],
+  "endless": {
+    "unlock_after": "day_05",
+    "initial_sun": 150,
+    "sky_sun_interval_ticks": 900,
+    "first_wave_tick": 600,
+    "base_interval_ticks": 900,
+    "min_interval_ticks": 360,
+    "base_zombies": 2,
+    "zombie_growth": 1,
+    "max_zombies_per_wave": 10,
+    "fast_ratio_base": 0.15,
+    "fast_ratio_growth": 0.04,
+    "tough_ratio_base": 0,
+    "tough_ratio_growth": 0.05,
+    "max_active_zombies": 28
+  }
+}

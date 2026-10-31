@@ -1,0 +1,12 @@
+{
+  "artifact": "dist/windows/PvzMiniGame-visual-audio-release",
+  "exe_sha256": "11c221106329171e4d2037eb0e34bc02131a1e4c41cef0c5b799759243b0e23a",
+  "exit_code": 0,
+  "python_in_child_path": false,
+  "smoke_frames": 8,
+  "game_loop": "headless smoke-play",
+  "screenshot": "docs/validation/014/windows/desktop-smoke.png",
+  "limitations": [
+    "Automated headless smoke is not real mouse gameplay or a physical device test."
+  ]
+}

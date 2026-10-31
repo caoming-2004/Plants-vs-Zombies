@@ -1,0 +1,32 @@
+{
+  "tracks": [
+    {
+      "file": "menu.mp3",
+      "title": "Fresh start",
+      "creator": "Ondrosik",
+      "source": "https://nullrights.com/track/9m665jb9u8",
+      "license": "CC0 1.0",
+      "role": "Menu loop",
+      "sha256": "c1bfca5b9872376311801c37dbbbca5956e840e6742c062be52cbbc332c0df79"
+    },
+    {
+      "file": "gameplay.mp3",
+      "title": "A Kingdom of tears battle theme (REMAKE) (wip)",
+      "creator": "game guy maker",
+      "source": "https://nullrights.com/track/6bycos4z26",
+      "license": "CC0 1.0",
+      "role": "Gameplay loop",
+      "sha256": "015cdb37d0d8be8abb00cdee5439b8091a0274d48607cbd37dd48cea9a36409c"
+    },
+    {
+      "file": "victory.mp3",
+      "title": "Victory Fanfare",
+      "creator": "ARoachIFoundOnMyPillow",
+      "source": "https://opengameart.org/content/victory-fanfare",
+      "direct_download": "https://opengameart.org/sites/default/files/fanfare1.mp3",
+      "license": "CC0 1.0",
+      "role": "One-shot victory cue",
+      "sha256": "3e013bbce9ab3a93c64e11ac7d3339cf7a46e9168063f1973fcdc9904c7bdb4c"
+    }
+  ]
+}

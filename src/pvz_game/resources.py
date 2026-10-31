@@ -1,6 +1,7 @@
 from pathlib import Path
 import json
 import logging
+import traceback
 from logging.handlers import RotatingFileHandler
 import os
 
@@ -30,11 +31,23 @@ def read_json(relative):
         raise RuntimeError(f"无法读取游戏配置：{relative}") from exc
 
 
+def user_data_dir():
+    """Writable per-user data root; never the read-only asset tree."""
+    android_private = os.environ.get("ANDROID_PRIVATE")
+    base = Path(android_private) if android_private else Path(os.environ.get("LOCALAPPDATA", Path.home()))
+    return base / "PvzMiniGame"
+
+
+def log_exception(message):
+    """Record a traceback for a recoverable UI/result failure."""
+    error_logger().error("%s\n%s", message, traceback.format_exc())
+
+
 def error_logger():
     logger = logging.getLogger("pvz")
     if not logger.handlers:
         try:
-            directory = Path(os.environ.get("LOCALAPPDATA", Path.home())) / "PvzMiniGame" / "logs"
+            directory = user_data_dir() / "logs"
             directory.mkdir(parents=True, exist_ok=True)
             handler = RotatingFileHandler(directory / "game.log", maxBytes=1024*1024,
                                           backupCount=2, encoding="utf-8")

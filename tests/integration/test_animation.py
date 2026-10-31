@@ -112,6 +112,25 @@ def test_every_required_clip_has_12_to_18_distinct_visible_poses_per_second():
                     assert duration>=60, f'{skin_id}/{role}/{state} loop is shorter than one second'
 
 
+def test_plant_pose_rate_is_about_12_distinct_poses_per_second():
+    plant_loops={
+        'sunflower':('idle',), 'peashooter':('idle',), 'wallnut':('idle',),
+        'jalapeno':('plant',), 'pangbaobao':('idle',), 'huanghuang':('idle',),
+    }
+    config,_=load()
+    for skin_id in ('default','dogs','dogs_photo'):
+        skin=Catalog().load(skin_id)
+        for role,states in plant_loops.items():
+            if role not in skin.data['roles']:continue
+            for state in states:
+                clip=skin.clip(role,state)
+                if not clip['loop']:continue
+                duration=sum(frame['duration_ticks'] for frame in clip['frames'])
+                unique=len({pygame.image.tobytes(skin.surface(frame),'RGBA') for frame in clip['frames']})
+                rate=pose_rate_hz(unique,duration,config['tick_hz'])
+                assert abs(rate-12)<=.2, f'{skin_id}/{role}/{state}: {rate:.2f}/s'
+
+
 def test_scaled_dog_roles_keep_every_pose_on_stable_foot_baseline():
     from pvz_game.presentation.animation import display_scale_for_role, DOG_SCALE
     from pvz_game.presentation.skin_catalog import Catalog
@@ -125,6 +144,82 @@ def test_scaled_dog_roles_keep_every_pose_on_stable_foot_baseline():
                     visible=skin.surface(frame).get_bounding_rect(min_alpha=1)
                     rendered_bottoms.append(round((frame['trim_offset'][1]+visible.bottom-frame['anchor'][1])*scale))
             assert max(rendered_bottoms)-min(rendered_bottoms)<=2
+
+
+def test_adjusted_dog_roles_fit_all_visible_frames():
+    from pvz_game.presentation.animation import DOG_SCALE,display_scale_for_role,fit_visible_frame
+    from pvz_game.presentation.dog_validation import dog_visual_bounds
+    from pvz_game.presentation.skin_catalog import REQUIRED_BY_SKIN
+    target=pygame.Surface((1050,600),pygame.SRCALPHA)
+    for skin_id in ('dogs','dogs_photo'):
+        skin=Catalog().load(skin_id)
+        roles=dict(REQUIRED);roles.update(REQUIRED_BY_SKIN.get(skin_id,{}))
+        largest_heights={}
+        for role,states in roles.items():
+            scale=display_scale_for_role(skin,role,DOG_SCALE)
+            heights=[]
+            for state in states:
+                for frame in skin.clip(role,state)['frames']:
+                    for position in ((0,0),(1050,600),(141,238),(933,542)):
+                        fitted=fit_visible_frame(target,skin,frame,position,scale)
+                        left,top,right,bottom=dog_visual_bounds(skin,role,frame,fitted,scale)
+                        assert left>=-1 and top>=-1 and right<=1051 and bottom<=601
+                    visible=skin.surface(frame).get_bounding_rect(min_alpha=1)
+                    heights.append(visible.h*scale/skin.pixel_scale)
+            largest_heights[role]=max(heights)
+        assert min(largest_heights.values())>0
+        assert (max(largest_heights.values())-min(largest_heights.values()))/max(largest_heights.values())<=.20
+        expected_map_height=188*DOG_SCALE/skin.pixel_scale
+        assert all(abs(height-expected_map_height)<=1.2 for height in largest_heights.values())
+    photo=Catalog().load('dogs_photo')
+    assert not {'pangbaobao','huanghuang'} & set(photo.data['roles'])
+
+
+def test_dog_frame_bounds_keep_full_silhouettes_and_source_pose_mapping():
+    import json
+    from pathlib import Path
+    from pvz_game.presentation.skin_catalog import REQUIRED_BY_SKIN
+    root=Path(__file__).resolve().parents[2]
+    skin=Catalog().load('dogs')
+    manifest=json.loads((root/'assets/skins/dogs/manifest.json').read_text(encoding='utf-8-sig'))
+    provenance=json.loads((root/'assets/skins/dogs/provenance.json').read_text(encoding='utf-8-sig'))
+    atlas=pygame.image.load(str(root/'assets/skins/dogs'/manifest['atlas']))
+    records={record['role']:record for record in provenance}
+    roles=dict(REQUIRED);roles.update(REQUIRED_BY_SKIN['dogs'])
+    for role,states in roles.items():
+        assert role in records
+        for state in states:
+            allowed=set(records[role]['clip_source_frames'][state])
+            for frame in skin.clip(role,state)['frames']:
+                rect=pygame.Rect(frame['rect'])
+                assert rect.left>=0 and rect.top>=0
+                assert rect.right<=atlas.get_width() and rect.bottom<=atlas.get_height()
+                visible=skin.surface(frame).get_bounding_rect(min_alpha=96)
+                assert visible.w and visible.h, f'{role}/{state} contains an empty frame'
+                assert visible.left>=8 and visible.top>=8
+                assert visible.right<=248 and visible.bottom<=232, f'{role}/{state} silhouette touches crop edge'
+                assert set(frame['source_frames'])<=allowed, f'{role}/{state} uses an unmapped source pose'
+
+
+def test_dog_zombie_faces_left_in_all_actor_states(monkeypatch,game):
+    from pvz_game.presentation import animation
+    observed=[]
+    def capture(target,skin,frame,position,scale=1,alpha=255,hit=False,flip_x=False):
+        observed.append(flip_x)
+    monkeypatch.setattr(animation,'blit_frame',capture)
+    appearance=AppearanceController(Catalog())
+    assert appearance.select('zombie','dogs','menu')
+    animator=Animator(appearance)
+    target=pygame.Surface((1050,600),pygame.SRCALPHA)
+    zombie={'id':99,'type_id':'zombie_basic','row':2,'x':700,'action':'walking'}
+    animator.draw_actor(target,zombie,(700,400),0)
+    zombie['action']='biting'
+    animator.draw_actor(target,zombie,(700,400),1)
+    animator.consume(game.snapshot(),[dict(kind='hit',id=99,tick=2,session_id=game.session_id)])
+    animator.draw_actor(target,zombie,(700,400),2)
+    animator.deaths.append(dict(type_id='zombie_basic',row=2,x=700,tick=3))
+    animator.draw_deaths(target,3,lambda row:400)
+    assert len(observed)>=4 and all(observed)
 
 
 def test_scaled_dog_card_and_preview_fit_their_viewports():
@@ -170,6 +265,32 @@ def test_hit_event_plays_hit_clip_then_resumes_base_animation(game):
     assert resumed==frame_at(skin.clip('zombie_basic','walk'),event_tick+duration)
 
 
+def test_squash_attack_uses_dog_pose_and_hit_has_visual_feedback(game):
+    game.sun=500
+    game.step([Command('SelectPlant',('pangbaobao',)),Command('PlantAt',(1,2),sequence=1)])
+    squash=game.at(1,2)
+    zombie=game.add_zombie(1,x=game.plant_x(squash)+100)
+    _,events=game.step()
+    start=next(event['tick'] for event in events
+               if event['kind']=='action_started' and event.get('action')=='attack')
+    appearance=AppearanceController(Catalog())
+    assert appearance.select('plant','dogs','menu')
+    animator=Animator(appearance)
+    animator.consume(game.snapshot(),events)
+    skin=appearance.skin_for('pangbaobao')
+    drawn=animator.draw_actor(pygame.Surface((1050,600),pygame.SRCALPHA),
+                              game.snapshot()['plants'][0],(285,300),game.tick)
+    assert drawn==frame_at(skin.clip('pangbaobao','attack'),game.tick-start)
+
+    game.tick=squash.next_action_tick
+    _,events=game.step()
+    animator.consume(game.snapshot(),events)
+    surface=pygame.Surface((1050,600),pygame.SRCALPHA)
+    animator.draw_squash_effects(surface,game.tick,game.row_y)
+    assert surface.get_bounding_rect().w>0
+    assert squash.id not in game.plants and zombie.id not in game.zombies
+
+
 def test_jalapeno_event_draws_only_a_timed_visual_effect(game):
     pygame.font.init()
     from pvz_game.presentation.renderer import Renderer
@@ -185,3 +306,30 @@ def test_jalapeno_event_draws_only_a_timed_visual_effect(game):
     renderer.animator.draw_row_clear_effects(pygame.Surface((1050,600),pygame.SRCALPHA),1000,
                                                game.config['grid_x'],game.row_y)
     assert renderer.animator.row_clears==[]
+
+def test_target_dog_frames_preserve_full_source_aspect_ratio():
+    import json
+    from pathlib import Path
+    from pvz_game.presentation.skin_catalog import Catalog
+    root = Path(__file__).resolve().parents[2]
+    skin = Catalog().load('dogs')
+    provenance = json.loads((root / 'assets/skins/dogs/provenance.json').read_text(encoding='utf-8-sig'))
+    records = {record['role']: record for record in provenance}
+    for role in ('sunflower', 'zombie_basic'):
+        bboxes = records[role].get('source_bboxes')
+        assert bboxes and len(bboxes) == 12
+        seen = set()
+        for clip in skin.data['roles'][role]['clips'].values():
+            for frame in clip['frames']:
+                refs = frame.get('source_frames', [])
+                if len(refs) != 1:
+                    continue
+                index = refs[0]
+                if index in seen:
+                    continue
+                seen.add(index)
+                source_ratio = bboxes[index][2] / bboxes[index][3]
+                visible = skin.surface(frame).get_bounding_rect(min_alpha=1)
+                assert visible.w and visible.h
+                assert abs((visible.w / visible.h) / source_ratio - 1) < 0.08
+        assert seen == set(range(12))

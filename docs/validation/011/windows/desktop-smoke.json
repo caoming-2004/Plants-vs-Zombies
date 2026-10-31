@@ -1,0 +1,12 @@
+{
+  "artifact": "dist/windows/PvzMiniGame-v0.6.1",
+  "exe_sha256": "b50d7f2c6221155faa7f0f943d6245d8a82d1338ca40f0303b8528139138db1f",
+  "exit_code": 0,
+  "python_in_child_path": false,
+  "smoke_frames": 8,
+  "game_loop": "headless smoke-play",
+  "screenshot": "docs/validation/011/windows/desktop-smoke.png",
+  "limitations": [
+    "Automated headless smoke is not real mouse gameplay or a physical device test."
+  ]
+}

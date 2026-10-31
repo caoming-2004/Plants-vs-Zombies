@@ -12,7 +12,8 @@ def test_background_keeps_logical_board_and_window_input_mapping():
     assert (config["grid_x"], config["grid_y"]) == (105, 160)
     assert (config["cell_width"], config["cell_height"]) == (72, 76)
     assert level["rows"] == 5 and level["cols"] == 12
-    assert renderer.default.ui["background"].get_width() >= 2800
+    assert renderer.default.ui["background"].get_width() >= 1900
+    assert renderer.default.ui["background"].get_height() >= 800
 
     expected = (2, 5)
     point = (

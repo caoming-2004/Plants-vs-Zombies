@@ -1,0 +1,7 @@
+--bootstrap=sdl2
+--requirements=python3,pygame-ce
+--arch=arm64-v8a
+--android-api=35
+--ndk-api=24
+--orientation=landscape
+--dist-name=pvz011_arm64

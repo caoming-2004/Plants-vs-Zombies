@@ -96,3 +96,47 @@ def test_no_mower_loss_priority(game):
     game.add_zombie(0,x=20)
     game.step()
     assert game.phase == "lost"
+
+
+def test_new_enemy_archetypes_move_and_resolve_combat(game):
+    from pvz_game.domain.models import Projectile
+    before={}
+    enemies={kind:game.add_zombie(row,x=700,type_id=kind)
+             for row,kind in enumerate(('zombie_basic','zombie_fast','zombie_tough'))}
+    before={kind:enemy.x for kind,enemy in enemies.items()}
+    game.step()
+    assert enemies['zombie_fast'].x<enemies['zombie_basic'].x<enemies['zombie_tough'].x
+    assert enemies['zombie_tough'].hp>enemies['zombie_basic'].hp
+    for enemy in enemies.values():
+        shot=Projectile(game.new_id(),0,enemy.row,enemy.x-50,enemy.x-50,
+                        20,6000,game.tick-1)
+        game.projectiles[shot.id]=shot
+    expected={kind:enemy.hp-20 for kind,enemy in enemies.items()}
+    game.step()
+    assert {kind:enemy.hp for kind,enemy in enemies.items()}==expected
+
+
+def test_wave_progression_and_restart_reset(game):
+    first,second,third=game.level['waves']
+    game.tick=first['start_tick']
+    game.step()
+    assert game.snapshot()['current_wave']==first['id']
+    assert any(event['kind']=='wave_started' for event in game.events)
+    game.tick=second['start_tick']
+    game.step()
+    assert game.snapshot()['current_wave']==second['id']
+    game.command(Command('Restart'))
+    snapshot=game.snapshot()
+    assert snapshot['current_wave'] is None and snapshot['wave_index']==0
+    assert game.next_spawn_index==0 and game.tick==0
+
+
+def test_squash_attack_state_is_cleared_on_restart(game):
+    plant(game,kind='pangbaobao',row=1,col=2)
+    squash=game.at(1,2)
+    zombie=game.add_zombie(1,x=game.plant_x(squash)+100)
+    game.step()
+    assert squash.action=='attacking' and squash.target_zombie_id==zombie.id
+    do(game,'Restart')
+    assert not game.plants and game.snapshot()['phase']=='playing'
+    assert all(p.target_zombie_id is None for p in game.plants.values())

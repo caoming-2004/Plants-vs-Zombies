@@ -33,13 +33,16 @@ def make_scene(config, level, scene="pressure"):
                    for i in range(counts["projectiles"])]
     suns = [dict(id=400 + i, x=130 + (i % 10) * 80, y=170 + (i % 5) * 72)
             for i in range(counts["suns"])]
+    waves=level.get('waves',())
     return dict(session_id=1, phase="playing", tick=0, sun=500,
                 selection=dict(kind="none", type_id=None),
                 ready_tick={plant["id"]: 0 for plant in config["plant_types"]},
                 plants=plants, zombies=zombies, projectiles=projectiles, suns=suns,
                 mowers=[dict(row=row, x=45, previous_x=45, state="ready")
                         for row in range(5)], next_spawn_index=0,
-                total_spawns=len(level["spawn_schedule"]), kills=0)
+                total_spawns=len(level["spawn_schedule"]), kills=0,
+                current_wave=waves[0]['id'] if waves else None,
+                wave_index=1 if waves else 0,wave_count=len(waves))
 
 
 def make_simulation(config, level, scene="pressure"):
@@ -95,11 +98,20 @@ def summarize_frame_intervals(intervals_ms):
     ordered = sorted(intervals_ms)
     elapsed = sum(intervals_ms) / 1000
     longest_slow_run = slow_run = 0
+    longest_over_33ms_run = over_33ms_run = over_33ms_frames = 0
     for value in intervals_ms:
         slow_run = slow_run + 1 if value > 50 else 0
         longest_slow_run = max(longest_slow_run, slow_run)
+        if value > 33:
+            over_33ms_frames += 1
+            over_33ms_run += 1
+            longest_over_33ms_run = max(longest_over_33ms_run, over_33ms_run)
+        else:
+            over_33ms_run = 0
     return dict(frames=len(intervals_ms), elapsed_seconds=round(elapsed, 3),
                 average_fps=round(len(intervals_ms) / elapsed, 2),
                 p95_frame_ms=round(ordered[math.ceil(.95 * len(ordered)) - 1], 2),
+                over_33ms_frames=over_33ms_frames,
+                longest_over_33ms_run=longest_over_33ms_run,
                 longest_over_50ms_frames=longest_slow_run,
                 frame_intervals_ms=[round(value, 3) for value in intervals_ms])

@@ -5,6 +5,80 @@
     "sha256": "5decf541f15737c0212621fc8f8cd3b384af3a621846bffe174aac39d9065e8e",
     "source_frame_count": 12,
     "source_layout": "4 columns x 3 rows",
+    "source_bboxes": [
+      [
+        28,
+        46,
+        314,
+        308
+      ],
+      [
+        386,
+        49,
+        311,
+        305
+      ],
+      [
+        739,
+        49,
+        312,
+        305
+      ],
+      [
+        1096,
+        53,
+        317,
+        301
+      ],
+      [
+        21,
+        400,
+        339,
+        317
+      ],
+      [
+        387,
+        389,
+        340,
+        329
+      ],
+      [
+        736,
+        385,
+        386,
+        333
+      ],
+      [
+        1101,
+        416,
+        312,
+        301
+      ],
+      [
+        26,
+        764,
+        326,
+        287
+      ],
+      [
+        376,
+        794,
+        337,
+        254
+      ],
+      [
+        726,
+        856,
+        340,
+        195
+      ],
+      [
+        1088,
+        877,
+        338,
+        174
+      ]
+    ],
     "clip_source_frames": {
       "idle": [
         0,
@@ -31,86 +105,39 @@
         11
       ]
     },
-    "inbetween_method": "original source poses with anchored alpha-blended transitions",
+    "inbetween_method": "original source poses with anchored alpha-blended transitions; full-silhouette connected components",
     "pixel_scale": 2,
     "anchor": [
       128,
       232
     ],
-    "origin": "preserved-cartoon-source"
+    "origin": "preserved-cartoon-source",
+    "extraction_method": "full-silhouette connected components with 8px transparent margin"
   },
   {
     "role": "wallnut",
-    "source": "xiaobao-user-20261026.png",
-    "sha256": "326712d394c3361572514396d1c7e6c8b42c9d482f8e42df2b8153f7931b36b3",
-    "source_frame_count": 60,
-    "source_layout": "10 columns x 6 rows",
+    "source": "xiaobao-user-007.png",
+    "sha256": "f7802942ee75e41995818a31a4d2707c8d4e30c2dbcd07da8fca1baa1a31fb15",
+    "source_frame_count": 12,
+    "source_layout": "4 columns x 3 rows",
     "clip_source_frames": {
       "idle": [
         0,
         1,
         2,
-        3,
+        3
+      ],
+      "hit": [
         4,
         5,
         6,
-        7,
+        7
+      ],
+      "die": [
         8,
         9,
         10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19
-      ],
-      "hit": [
-        20,
-        21,
-        22,
-        23,
-        24,
-        25,
-        26,
-        27,
-        28,
-        29
-      ],
-      "die": [
-        30,
-        31,
-        32,
-        33,
-        34,
-        35,
-        36,
-        37,
-        38,
-        39,
-        40,
-        41,
-        42,
-        43,
-        44,
-        45,
-        46,
-        47,
-        48,
-        49,
-        50,
-        51,
-        52,
-        53,
-        54,
-        55,
-        56,
-        57,
-        58,
-        59
+        11
       ]
     },
     "inbetween_method": "authored photo poses; output frames retain original source_frames",
@@ -123,78 +150,34 @@
   },
   {
     "role": "jalapeno",
-    "source": "xiaodu-user-20261026.png",
-    "sha256": "c93a5dae90cccbab8537c217e32730ff92981940da1e53b9e86d402d9f78ff7b",
-    "source_frame_count": 60,
-    "source_layout": "10 columns x 6 rows",
+    "source": "xiaodu-user-007.png",
+    "sha256": "22165fc920f847822c4070d244ff22c256961334f2730890b40b523f7d371a77",
+    "source_frame_count": 12,
+    "source_layout": "4 columns x 3 rows",
     "clip_source_frames": {
       "plant": [
         0,
         1,
         2,
-        3,
+        3
+      ],
+      "ignite": [
         4,
         5,
         6,
-        7,
-        8,
-        9
-      ],
-      "ignite": [
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24,
-        25,
-        26,
-        27,
-        28,
-        29,
-        30,
-        31,
-        32,
-        33,
-        34,
-        35,
-        36,
-        37,
-        38,
-        39,
-        40,
-        41,
-        42,
-        43,
-        44
+        7
       ],
       "hit": [
-        45,
-        46,
-        47,
-        48,
-        49,
-        50,
-        51
+        8,
+        9,
+        10,
+        11
       ],
       "die": [
-        52,
-        53,
-        54,
-        55,
-        56,
-        57,
-        58,
-        59
+        8,
+        9,
+        10,
+        11
       ]
     },
     "inbetween_method": "authored photo poses; output frames retain original source_frames",
@@ -207,78 +190,34 @@
   },
   {
     "role": "peashooter",
-    "source": "haohazi-user-20261026.png",
-    "sha256": "1780e40ea790f3e9272d3e7f781067c38d20ee47395ba17d7dfd04d67d95b0c2",
-    "source_frame_count": 60,
-    "source_layout": "10 columns x 6 rows",
+    "source": "haohazi-user-007.png",
+    "sha256": "06d0b8272a56aecdb6a0612afd4ecea97ab883ed81dd0ce065861edbe6fe7325",
+    "source_frame_count": 12,
+    "source_layout": "4 columns x 3 rows",
     "clip_source_frames": {
       "idle": [
         0,
         1,
         2,
-        3,
+        3
+      ],
+      "attack": [
         4,
         5,
         6,
-        7,
+        7
+      ],
+      "hit": [
         8,
         9,
         10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19
-      ],
-      "attack": [
-        20,
-        21,
-        22,
-        23,
-        24,
-        25,
-        26,
-        27,
-        28,
-        29,
-        30,
-        31,
-        32,
-        33,
-        34,
-        35,
-        36,
-        37,
-        38,
-        39
-      ],
-      "hit": [
-        40,
-        41,
-        42,
-        43,
-        44,
-        45,
-        46,
-        47,
-        48,
-        49
+        11
       ],
       "die": [
-        50,
-        51,
-        52,
-        53,
-        54,
-        55,
-        56,
-        57,
-        58,
-        59
+        8,
+        9,
+        10,
+        11
       ]
     },
     "inbetween_method": "authored photo poses; output frames retain original source_frames",

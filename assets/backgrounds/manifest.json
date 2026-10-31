@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "default": "day",
+  "options": [
+    {
+      "id": "day",
+      "name": "日间草坪",
+      "file": "day.png",
+      "thumb": "thumbs/day.png",
+      "width": 2560,
+      "height": 1440,
+      "theme": "day",
+      "source": "Project-generated environment art (OpenAI ImageGen, 2026-10-31)",
+      "sha256": "e7eb26d753af2b60cb4777d428b43741e9f36f1f8a4e8c09edd56c0bb3ac2bbf",
+      "license": "Generated for this project; no third-party source image",
+      "author": "OpenAI ImageGen"
+    },
+    {
+      "id": "night",
+      "name": "夜间草坪",
+      "file": "night.png",
+      "thumb": "thumbs/night.png",
+      "width": 2560,
+      "height": 1440,
+      "theme": "night",
+      "source": "Project-generated environment art (OpenAI ImageGen, 2026-10-31)",
+      "sha256": "70ee421b03249173fb2617d3d4130f2bffb2353c4e5b9a6179def449b6b1d135",
+      "license": "Generated for this project; no third-party source image",
+      "author": "OpenAI ImageGen"
+    },
+    {
+      "id": "dusk",
+      "name": "黄昏草坪",
+      "file": "dusk.png",
+      "thumb": "thumbs/dusk.png",
+      "width": 2560,
+      "height": 1440,
+      "theme": "dusk",
+      "source": "Project-generated environment art (OpenAI ImageGen, 2026-10-31)",
+      "sha256": "2e8f3abc72d9a2d74070a3a9b593abbbd52d730386bb0dee7120ef9d61abd52a",
+      "license": "Generated for this project; no third-party source image",
+      "author": "OpenAI ImageGen"
+    }
+  ]
+}

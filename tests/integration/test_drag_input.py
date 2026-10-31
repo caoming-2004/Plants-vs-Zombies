@@ -29,7 +29,7 @@ def test_release_valid_cell_emits_one_plant_command_and_invalid_targets_do_not(g
     commands=finish_drag(card,point,"playing",config,level)
     assert [command.kind for command in commands]==["SelectPlant","PlantAt"]
     assert commands[1].args==(0,0)
-    assert finish_drag(card,(820,40),"playing",config,level)==[]
+    assert finish_drag(card,(900,40),"playing",config,level)==[]
     assert finish_drag(card,None,"playing",config,level)==[]
     assert finish_drag(card,(config["grid_x"]+36,config["grid_y"]+38),
                        "paused",config,level)==[]
@@ -64,7 +64,7 @@ def test_shovel_drag_validates_target_and_emits_one_removal(game):
     update_drag(shovel,point,empty,config,level,{})
     assert not shovel.preview_valid and shovel.reason_code=='no_plant'
     assert finish_drag(shovel,point,'playing',config,level,empty)==[]
-    assert finish_drag(shovel,(680,50),'playing',config,level)==[Command('SelectShovel')]
+    assert finish_drag(shovel,(810,50),'playing',config,level)==[Command('SelectShovel')]
 
 
 def test_plant_drag_rejects_currently_invalid_release(game):
@@ -77,6 +77,50 @@ def test_plant_drag_rejects_currently_invalid_release(game):
     update_drag(card,point,snapshot,config,level,types)
     assert not card.preview_valid
     assert finish_drag(card,point,'playing',config,level,snapshot,types)==[]
+
+
+def test_drag_preview_tracks_pointer_continuously(monkeypatch,game):
+    import pygame
+    from pvz_game.presentation import renderer as renderer_module
+    from pvz_game.presentation.renderer import Renderer
+    pygame.font.init()
+    positions=[]
+    monkeypatch.setattr(renderer_module,'blit_frame',
+        lambda target,skin,frame,position,*args,**kwargs:positions.append(position))
+    config,level=load();types={item['id']:item for item in config['plant_types']}
+    point=(config['grid_x']+18.25,config['grid_y']+31.75)
+    drag=begin_drag('sunflower',(180,40))
+    update_drag(drag,point,game.snapshot(),config,level,types)
+    Renderer(config).draw_drag_preview(drag,game.snapshot())
+    assert positions
+    assert positions[-1][0]==point[0]
+    assert positions[-1][1]==point[1]+28
+
+
+def test_nearest_cell_tiebreak_and_invalid_rejection_without_cost(game):
+    config,level=load();types={item['id']:item for item in config['plant_types']}
+    row_y=config['grid_y']+config['cell_height']/2
+    tie=(config['grid_x']+config['cell_width'],row_y)
+    drag=begin_drag('jalapeno',(500,40))
+    update_drag(drag,tie,game.snapshot(),config,level,types)
+    assert drag.hover_cell==(0,0)
+    occupied=dict(id=71,type_id='wallnut',row=0,col=0,hp=400)
+    snapshot=dict(game.snapshot(),plants=(occupied,))
+    update_drag(drag,tie,snapshot,config,level,types)
+    before=(game.sun,dict(game.ready_tick))
+    assert finish_drag(drag,tie,'playing',config,level,snapshot,types)==[]
+    assert (game.sun,dict(game.ready_tick))==before
+    outside=(config['grid_x']-1,row_y)
+    update_drag(drag,outside,game.snapshot(),config,level,types)
+    assert drag.hover_cell is None and drag.reason_code=='out_of_bounds'
+    assert finish_drag(drag,outside,'playing',config,level,game.snapshot(),types)==[]
+    game.sun=0
+    legal=(config['grid_x']+config['cell_width']/2,row_y)
+    update_drag(drag,legal,game.snapshot(),config,level,types)
+    assert drag.reason_code=='insufficient_sun'
+    before=(game.sun,dict(game.ready_tick))
+    assert finish_drag(drag,legal,'playing',config,level,game.snapshot(),types)==[]
+    assert (game.sun,dict(game.ready_tick))==before
 
 
 def test_click_plant_card_selection_remains_available(game):

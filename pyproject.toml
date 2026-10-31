@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pvz-mini-game"
-version = "0.2.0"
+version = "0.6.0"
 description = "Offline playable lawn defense prototype"
 requires-python = ">=3.12,<3.13"
 dependencies = ["pygame-ce>=2.5,<3"]

@@ -6,6 +6,15 @@ from ..config import LOGICAL_WIDTH, LOGICAL_HEIGHT
 from ..domain.plant_rules import placement_reason
 
 PLANT_CARDS=("sunflower","peashooter","wallnut","jalapeno")
+DOG_PLANT_CARDS=PLANT_CARDS+("pangbaobao","huanghuang")
+
+
+def visible_plant_cards(skin_id='default', level=None):
+    cards = DOG_PLANT_CARDS if skin_id=='dogs' else PLANT_CARDS
+    if level is not None and level.get("available_plants"):
+        allowed = set(level["available_plants"])
+        cards = tuple(card for card in cards if card in allowed)
+    return cards
 
 
 @dataclass
@@ -18,9 +27,9 @@ class DragState:
     reason_code: str | None="out_of_bounds"
 
 
-def card_at(point):
+def card_at(point,skin_id='default',level=None):
     if point is None:return None
-    return next((kind for kind in PLANT_CARDS if inside(point,BUTTONS[kind])),None)
+    return next((kind for kind in visible_plant_cards(skin_id,level) if inside(point,BUTTONS[kind])),None)
 
 
 def cell_at(point,config,rows,cols):
@@ -32,6 +41,18 @@ def cell_at(point,config,rows,cols):
     return None
 
 
+def nearest_cell_at(point,config,rows,cols):
+    """Return the closest valid cell center; ties resolve by row then column."""
+    if point is None:return None
+    x,y=point
+    left,top=config['grid_x'],config['grid_y']
+    width,height=config['cell_width'],config['cell_height']
+    if not (left<=x<left+cols*width and top<=y<top+rows*height):return None
+    return min(((x-(left+(col+.5)*width))**2+
+                (y-(top+(row+.5)*height))**2,row,col)
+               for row in range(rows) for col in range(cols))[1:]
+
+
 def begin_drag(plant_type_id,point):
     return DragState(plant_type_id,point,"shovel" if plant_type_id=="shovel" else "plant")
 
@@ -39,7 +60,7 @@ def begin_drag(plant_type_id,point):
 def update_drag(state,point,snapshot,config,level,plant_types):
     if state is None:return None
     state.pointer=point
-    state.hover_cell=cell_at(point,config,level["rows"],level["cols"])
+    state.hover_cell=nearest_cell_at(point,config,level["rows"],level["cols"])
     if state.hover_cell is None:
         state.preview_valid=False
         state.reason_code="out_of_bounds"
@@ -49,18 +70,21 @@ def update_drag(state,point,snapshot,config,level,plant_types):
             state.reason_code=None if any(p["row"]==row and p["col"]==col and p["hp"]>0
                                           for p in snapshot["plants"]) else "no_plant"
         else:
-            state.reason_code=placement_reason(snapshot,plant_types,level["rows"],
-                                               level["cols"],state.plant_type_id,row,col)
+            if level.get("available_plants") and state.plant_type_id not in level["available_plants"]:
+                state.reason_code="unavailable"
+            else:
+                state.reason_code=placement_reason(snapshot,plant_types,level["rows"],
+                                                   level["cols"],state.plant_type_id,row,col)
         state.preview_valid=state.reason_code is None
     return state
 
 
-def finish_drag(state,point,phase,config,level,snapshot=None,plant_types=None):
+def finish_drag(state,point,phase,config,level,snapshot=None,plant_types=None,skin_id='default'):
     if state is None or phase!="playing" or point is None:return []
-    card=card_at(point)
+    card=card_at(point,skin_id,level)
     if card is not None:return [Command("SelectPlant",(card,))]
     if inside(point,BUTTONS["shovel"]):return [Command("SelectShovel")]
-    cell=cell_at(point,config,level["rows"],level["cols"])
+    cell=nearest_cell_at(point,config,level["rows"],level["cols"])
     if cell is None:return []
     row,col=cell
     if snapshot is not None:
@@ -68,6 +92,8 @@ def finish_drag(state,point,phase,config,level,snapshot=None,plant_types=None):
             if not any(p["row"]==row and p["col"]==col and p["hp"]>0 for p in snapshot["plants"]):return []
             return [Command("SelectShovel"),Command("ShovelAt",(row,col),sequence=1)]
         if plant_types is not None:
+            if level.get("available_plants") and state.plant_type_id not in level["available_plants"]:
+                return []
             reason=placement_reason(snapshot,plant_types,level["rows"],level["cols"],state.plant_type_id,row,col)
             if reason is not None:return []
         elif not state.preview_valid or state.hover_cell!=(row,col):return []
@@ -98,7 +124,7 @@ def inside(point, rect):
     return a <= x < a+w and b <= y < b+h
 
 
-def click(point, snapshot, config, help_open=False, button=1, skins_open=False):
+def click(point, snapshot, config, help_open=False, button=1, skins_open=False,skin_id='default',view='main',level=None):
     if point is None:
         return None
     phase = snapshot["phase"]
@@ -108,8 +134,21 @@ def click(point, snapshot, config, help_open=False, button=1, skins_open=False):
         return None
     def hit(key): return inside(point,BUTTONS[key])
     if phase == "menu":
+        if view == "levels":
+            if hit("back_levels"): return "close_levels"
+            for index in range(1, 6):
+                if hit(f"level_{index}"): return f"select_stage_{index}"
+            if hit("endless"): return "select_endless"
+            return None
+        if view == "backgrounds":
+            if hit("back_backgrounds"): return "close_backgrounds"
+            for index in range(1, 4):
+                if hit(f"background_{index}"): return f"select_background_{index}"
+            return None
         if skins_open:
             if hit('back_skins'): return 'close_skins'
+            for role in ('pangbaobao','huanghuang'):
+                if hit('role_preview_'+role):return 'preview_role_'+role
             for side in ('plant','zombie'):
                 for skin in (('default','dogs','dogs_photo') if side=='plant' else ('default','dogs')):
                     if hit(side+'_'+skin):return 'choose_'+side+'_'+skin
@@ -119,6 +158,10 @@ def click(point, snapshot, config, help_open=False, button=1, skins_open=False):
         if hit("start"): return Command("Start")
         if hit("help"): return "open_help"
         if hit("skins"): return "open_skins"
+        if hit("backgrounds"): return "open_backgrounds"
+        if hit("music_toggle"): return "toggle_music"
+        if hit("music_volume_down"): return "music_volume_down"
+        if hit("music_volume_up"): return "music_volume_up"
         if hit("exit_menu"): return Command("Quit")
         return None
     if phase == "paused":
@@ -126,6 +169,7 @@ def click(point, snapshot, config, help_open=False, button=1, skins_open=False):
         if hit("quit_pause"): return Command("Quit")
         return None
     if phase in ("won","lost"):
+        if hit("next_level"): return "next_level"
         if hit("restart"): return Command("Restart")
         if hit("menu"): return Command("ReturnToMenu")
         if hit("exit_result"): return Command("Quit")
@@ -133,7 +177,7 @@ def click(point, snapshot, config, help_open=False, button=1, skins_open=False):
     if phase != "playing": return None
     if hit("pause"): return Command("Pause")
     if inside(point,HUD_SUN_RECT): return None
-    for kind in PLANT_CARDS:
+    for kind in visible_plant_cards(skin_id,level):
         if hit(kind):return Command("SelectPlant",(kind,))
     if hit("shovel"): return Command("SelectShovel")
     for s in reversed(snapshot["suns"]):

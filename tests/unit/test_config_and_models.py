@@ -54,6 +54,20 @@ def test_all_four_plant_roles_have_valid_role_specific_fields():
     assert validate(config, level)[0] is config
 
 
+def test_wave_and_enemy_configuration_validates():
+    config,level=load()
+    assert {item['id'] for item in config['zombie_types']}=={
+        'zombie_basic','zombie_fast','zombie_tough'}
+    assert len(level['waves'])>=3
+    assert all(a['strength']<b['strength'] for a,b in zip(level['waves'],level['waves'][1:]))
+    assert {spawn['wave_id'] for spawn in level['spawn_schedule']}=={
+        wave['id'] for wave in level['waves']}
+    bad=deepcopy(level)
+    bad['spawn_schedule'][0]['wave_id']='unknown_wave'
+    with pytest.raises(ValueError):
+        validate(config,bad)
+
+
 @pytest.mark.parametrize("bad_plant", [
     {"id": "wallnut", "name": "坚果墙", "price": 50, "cooldown_ticks": 1800,
      "role": "blocker"},

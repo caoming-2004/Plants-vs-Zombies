@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "id": "day_05",
+  "order": 5,
+  "name": "第 5 关 · 最后的草坪",
+  "mode": "campaign",
+  "rows": 5,
+  "cols": 12,
+  "initial_sun": 200,
+  "sky_sun_interval_ticks": 720,
+  "mower_rows": [
+    0,
+    2,
+    4
+  ],
+  "sun_schedule": [],
+  "spawn_schedule": [
+    {
+      "tick": 900,
+      "row": 0,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 1300,
+      "row": 2,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 1700,
+      "row": 4,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 2100,
+      "row": 1,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 2500,
+      "row": 3,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 2900,
+      "row": 0,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 3300,
+      "row": 2,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 3400,
+      "row": 4,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 3800,
+      "row": 1,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 4200,
+      "row": 3,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 4600,
+      "row": 0,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 5000,
+      "row": 2,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 5400,
+      "row": 4,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 5800,
+      "row": 1,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 6200,
+      "row": 3,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 6800,
+      "row": 0,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 7200,
+      "row": 2,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 7600,
+      "row": 4,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 8000,
+      "row": 1,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 8400,
+      "row": 3,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 8800,
+      "row": 0,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 9200,
+      "row": 2,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 9600,
+      "row": 4,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 10000,
+      "row": 1,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_3"
+    }
+  ],
+  "waves": [
+    {
+      "id": "wave_1",
+      "name": "第一波",
+      "start_tick": 900,
+      "strength": 1
+    },
+    {
+      "id": "wave_2",
+      "name": "第二波",
+      "start_tick": 3400,
+      "strength": 1.8
+    },
+    {
+      "id": "wave_3",
+      "name": "最后一波",
+      "start_tick": 6800,
+      "strength": 2.9
+    }
+  ],
+  "star_goals": [
+    {
+      "id": "no_mower",
+      "kind": "mowers_used_at_most",
+      "threshold": 0,
+      "text": "不触发割草机"
+    },
+    {
+      "id": "fast_clear",
+      "kind": "clear_within_ticks",
+      "threshold": 24000,
+      "text": "在 400 秒内清场"
+    }
+  ]
+}

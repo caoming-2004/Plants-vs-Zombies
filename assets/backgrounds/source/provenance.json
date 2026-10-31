@@ -1,0 +1,45 @@
+{
+  "master": {
+    "file": "source/yard-defense-master.png",
+    "source": "Project-generated environment art (OpenAI ImageGen, 2026-10-31)",
+    "generator": "OpenAI ImageGen",
+    "license": "Generated for this project; no third-party source image",
+    "sha256": "47b9f6f7ca5f1d217f98fd55adabfd4e754933c121686fbd13594d2994b11b00",
+    "prompt": "Mature cinematic photorealistic residential lawn defense environment; broad uncluttered grass playfield; realistic garden fence and mature trees; no characters, text, roads, horror, or childish cartoon style."
+  },
+  "variants": [
+    {
+      "id": "day",
+      "source": "Project-generated environment art (OpenAI ImageGen, 2026-10-31)",
+      "author": "OpenAI ImageGen",
+      "license": "Generated for this project; no third-party source image",
+      "width": 2560,
+      "height": 1440,
+      "sha256": "e7eb26d753af2b60cb4777d428b43741e9f36f1f8a4e8c09edd56c0bb3ac2bbf",
+      "derivation": "crop to 16:9 and day color grade from the generated master",
+      "generated_at": "2026-10-31"
+    },
+    {
+      "id": "night",
+      "source": "Project-generated environment art (OpenAI ImageGen, 2026-10-31)",
+      "author": "OpenAI ImageGen",
+      "license": "Generated for this project; no third-party source image",
+      "width": 2560,
+      "height": 1440,
+      "sha256": "70ee421b03249173fb2617d3d4130f2bffb2353c4e5b9a6179def449b6b1d135",
+      "derivation": "crop to 16:9 and night color grade from the generated master",
+      "generated_at": "2026-10-31"
+    },
+    {
+      "id": "dusk",
+      "source": "Project-generated environment art (OpenAI ImageGen, 2026-10-31)",
+      "author": "OpenAI ImageGen",
+      "license": "Generated for this project; no third-party source image",
+      "width": 2560,
+      "height": 1440,
+      "sha256": "2e8f3abc72d9a2d74070a3a9b593abbbd52d730386bb0dee7120ef9d61abd52a",
+      "derivation": "crop to 16:9 and dusk color grade from the generated master",
+      "generated_at": "2026-10-31"
+    }
+  ]
+}

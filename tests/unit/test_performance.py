@@ -34,6 +34,20 @@ def test_benchmark_scenes_match_the_declared_fixed_loads():
 
 
 def test_frame_interval_summary_reports_p95_and_long_slow_run():
-    report = summarize_frame_intervals([16, 51, 53, 20, 17])
+    report = summarize_frame_intervals([16, 34, 53, 20, 17])
     assert report["p95_frame_ms"] == 53
-    assert report["longest_over_50ms_frames"] == 2
+    assert report["longest_over_50ms_frames"] == 1
+    assert report["over_33ms_frames"] == 2
+    assert report["longest_over_33ms_run"] == 2
+
+
+def test_hot_path_can_skip_unused_tick_snapshot_without_changing_events():
+    config, level = load()
+    with_snapshot = make_simulation(config, level, "standard")
+    without_snapshot = make_simulation(config, level, "standard")
+    snapshot, expected_events = with_snapshot.step()
+    empty_snapshot, actual_events = without_snapshot.step(include_snapshot=False)
+    assert snapshot["tick"] == 1
+    assert empty_snapshot is None
+    assert actual_events == expected_events
+    assert without_snapshot.snapshot() == snapshot

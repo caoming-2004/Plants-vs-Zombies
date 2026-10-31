@@ -1,0 +1,68 @@
+{
+  "method": "perf_counter at injected mouse-down to display.flip after the matching Renderer.draw; real Windows display",
+  "start_trials": [
+    {
+      "start_ms": 59.6,
+      "open_ms": null,
+      "select_ms": null,
+      "skin_ready_ms": null
+    },
+    {
+      "start_ms": 44.51,
+      "open_ms": null,
+      "select_ms": null,
+      "skin_ready_ms": null
+    },
+    {
+      "start_ms": 52.58,
+      "open_ms": null,
+      "select_ms": null,
+      "skin_ready_ms": null
+    },
+    {
+      "start_ms": 46.62,
+      "open_ms": null,
+      "select_ms": null,
+      "skin_ready_ms": null
+    },
+    {
+      "start_ms": 42.23,
+      "open_ms": null,
+      "select_ms": null,
+      "skin_ready_ms": null
+    }
+  ],
+  "skin_trials": [
+    {
+      "start_ms": null,
+      "open_ms": 54.69,
+      "select_ms": 16.22,
+      "skin_ready_ms": 603.16
+    },
+    {
+      "start_ms": null,
+      "open_ms": 41.7,
+      "select_ms": 15.43,
+      "skin_ready_ms": 568.0
+    },
+    {
+      "start_ms": null,
+      "open_ms": 34.91,
+      "select_ms": 10.39,
+      "skin_ready_ms": 586.65
+    },
+    {
+      "start_ms": null,
+      "open_ms": 33.42,
+      "select_ms": 13.6,
+      "skin_ready_ms": 570.96
+    },
+    {
+      "start_ms": null,
+      "open_ms": 41.5,
+      "select_ms": 16.35,
+      "skin_ready_ms": 587.4
+    }
+  ],
+  "measured_at": "2026-10-30 11:05:39"
+}

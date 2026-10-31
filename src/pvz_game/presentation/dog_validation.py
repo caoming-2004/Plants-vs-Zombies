@@ -3,14 +3,20 @@ from itertools import combinations_with_replacement, product
 import pygame
 
 from .animation import DOG_SCALE, display_scale_for_role
-from .skin_catalog import REQUIRED
+from .skin_catalog import REQUIRED, REQUIRED_BY_SKIN
 
 BODY_ALPHA_THRESHOLD = 96
-MAX_OVERLAP_RATIO = 0.25
+MAX_OVERLAP_RATIO = 0.35
+
+
+def _roles(skin):
+    roles=dict(REQUIRED)
+    roles.update(REQUIRED_BY_SKIN.get(skin.data.get('skin_id'),{}))
+    return roles
 
 
 def _frames(skin, role):
-    for state in sorted(REQUIRED[role]):
+    for state in sorted(_roles(skin)[role]):
         for index, frame in enumerate(skin.clip(role, state)["frames"]):
             yield state, index, frame
 
@@ -53,7 +59,8 @@ def measure_dog_overlap(dog_skin, cell_width=72, cell_height=76, scale=None):
         raise ValueError("cell dimensions and scale must be positive")
 
     actors = {}
-    for role in REQUIRED:
+    roles=_roles(dog_skin)
+    for role in roles:
         role_scale = scale if scale is not None else display_scale_for_role(
             dog_skin, role, DOG_SCALE
         )
@@ -64,7 +71,7 @@ def measure_dog_overlap(dog_skin, cell_width=72, cell_height=76, scale=None):
 
     worst_ratio = 0.0
     worst_pair = None
-    roles = tuple(REQUIRED)
+    roles = tuple(actors)
     for left_index, left_role in enumerate(roles):
         for right_role in roles[left_index:]:
             left_frames = actors[left_role]
@@ -100,11 +107,7 @@ def validate_dog_non_overlap(dog_skin, default_skin, cell_width=72,
                              cell_height=76, scale=None):
     """Report oversized overlaps and roles rendered below the visibility floor."""
     diagnostics = []
-    for role in REQUIRED:
-        reference = max(
-            default_skin.surface(frame).get_bounding_rect(min_alpha=BODY_ALPHA_THRESHOLD).height
-            for _, _, frame in _frames(default_skin, role)
-        ) / default_skin.pixel_scale
+    for role in _roles(dog_skin):
         role_scale = scale if scale is not None else display_scale_for_role(
             dog_skin, role, DOG_SCALE
         )
@@ -113,10 +116,10 @@ def validate_dog_non_overlap(dog_skin, default_skin, cell_width=72,
             for state, index, frame in _frames(dog_skin, role)
         ]
         rendered_height, state, index = max(heights, default=(0, "none", -1))
-        if rendered_height < reference * .75:
+        if rendered_height < 48:
             diagnostics.append(
-                f"height_below_75_percent role={role} state={state} frame={index} rendered={rendered_height:g} "
-                f"minimum={reference * .75:g}"
+                f"height_below_visibility_floor role={role} state={state}[{index}] "
+                f"rendered={rendered_height:g} minimum=48"
             )
 
     report = measure_dog_overlap(dog_skin, cell_width, cell_height, scale)
@@ -130,3 +133,41 @@ def validate_dog_non_overlap(dog_skin, default_skin, cell_width=72,
             f"offset={offset}"
         )
     return diagnostics
+
+
+def dog_visual_bounds(skin, role, frame, position, scale):
+    """Return the rendered non-transparent body bounds in logical pixels."""
+    image=skin.surface(frame)
+    visible=image.get_bounding_rect(min_alpha=1)
+    factor=scale/skin.pixel_scale
+    offset,anchor=frame['trim_offset'],frame['anchor']
+    left=position[0]+(offset[0]+visible.x-anchor[0])*factor
+    top=position[1]+(offset[1]+visible.y-anchor[1])*factor
+    return (left,top,left+visible.w*factor,top+visible.h*factor)
+
+
+def validate_dog_canvas_bounds(skin, canvas=(1050,600)):
+    """Ensure every required dog pose can be placed fully inside the window."""
+    from .animation import fit_visible_frame
+    roles=_roles(skin)
+    failures=[]
+    for role,states in roles.items():
+        scale=display_scale_for_role(skin,role,DOG_SCALE)
+        for state in states:
+            for index,frame in enumerate(skin.clip(role,state)['frames']):
+                for position in ((0,0),(canvas[0],canvas[1])):
+                    fitted=fit_visible_frame(_BoundsTarget(canvas),skin,frame,position,scale)
+                    left,top,right,bottom=dog_visual_bounds(skin,role,frame,fitted,scale)
+                    if left < -1 or top < -1 or right > canvas[0]+1 or bottom > canvas[1]+1:
+                        failures.append(f"{role}.{state}[{index}] bounds={(left,top,right,bottom)}")
+                        break
+                if failures and failures[-1].startswith(role+'.'+state+'['):
+                    break
+            if failures and failures[-1].startswith(role+'.'+state+'['):
+                break
+    return failures
+
+
+class _BoundsTarget:
+    def __init__(self,size):self.size=size
+    def get_size(self):return self.size

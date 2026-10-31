@@ -1,10 +1,10 @@
 {
-  "sha256": "942d13b0ba0247af0884a98fc65ba7bd9a3e3b986acb3c42099e052622dd2e0b",
+  "sha256": "ca9681f77bab43155e901ecc0e3a31b084043995da16e4e5056997bfa516d903",
   "platform": "nt",
   "python_in_child_path": false,
   "proxy_points_to_unreachable_local_port": true,
   "caveat": "Not an OS-level network block or a clean VM; headless SDL smoke, not mouse gameplay",
-  "relocated_directory": ".tools/试玩 目录检查 v0.2.0",
+  "relocated_directory": ".tools/试玩 目录检查 PvzMiniGame-visual-quality-release",
   "combinations": [
     {
       "plant": "default",
@@ -19,6 +19,12 @@
       "screenshot": "bundle-dogs-default.png"
     },
     {
+      "plant": "dogs_photo",
+      "zombie": "default",
+      "exit_code": 0,
+      "screenshot": "bundle-dogs_photo-default.png"
+    },
+    {
       "plant": "default",
       "zombie": "dogs",
       "exit_code": 0,
@@ -31,11 +37,17 @@
       "screenshot": "bundle-dogs-dogs.png"
     },
     {
-      "plant": "dogs",
+      "plant": "dogs_photo",
+      "zombie": "dogs",
+      "exit_code": 0,
+      "screenshot": "bundle-dogs_photo-dogs.png"
+    },
+    {
+      "plant": "dogs_photo",
       "zombie": "dogs",
       "scene": "skin_menu",
       "exit_code": 0,
-      "screenshot": "bundle-dog-menu.png"
+      "screenshot": "bundle-dog-photo-menu.png"
     }
   ]
 }

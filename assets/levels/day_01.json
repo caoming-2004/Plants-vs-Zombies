@@ -1,17 +1,118 @@
 {
-  "id":"day_01", "rows":5, "cols":12, "sun_schedule":[],
-  "spawn_schedule":[
-    {"tick":1200,"row":0,"type_id":"zombie_basic"},
-    {"tick":2100,"row":1,"type_id":"zombie_basic"},
-    {"tick":3000,"row":2,"type_id":"zombie_basic"},
-    {"tick":3900,"row":3,"type_id":"zombie_basic"},
-    {"tick":4800,"row":4,"type_id":"zombie_basic"},
-    {"tick":5700,"row":0,"type_id":"zombie_basic"},
-    {"tick":6600,"row":1,"type_id":"zombie_basic"},
-    {"tick":7500,"row":2,"type_id":"zombie_basic"},
-    {"tick":8400,"row":3,"type_id":"zombie_basic"},
-    {"tick":9300,"row":4,"type_id":"zombie_basic"},
-    {"tick":10200,"row":0,"type_id":"zombie_basic"},
-    {"tick":11100,"row":1,"type_id":"zombie_basic"}
+  "schema_version": 1,
+  "id": "day_01",
+  "order": 1,
+  "name": "第 1 关 · 前院",
+  "mode": "campaign",
+  "rows": 5,
+  "cols": 12,
+  "star_goals": [
+    {
+      "id": "no_mower",
+      "kind": "mowers_used_at_most",
+      "threshold": 0,
+      "text": "不触发割草机"
+    },
+    {
+      "id": "fast_clear",
+      "kind": "clear_within_ticks",
+      "threshold": 14000,
+      "text": "在 234 秒内清场"
+    }
+  ],
+  "sun_schedule": [],
+  "spawn_schedule": [
+    {
+      "tick": 1200,
+      "row": 0,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 2100,
+      "row": 1,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 3000,
+      "row": 2,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 3900,
+      "row": 3,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 4800,
+      "row": 4,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 5700,
+      "row": 0,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 6600,
+      "row": 1,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 7500,
+      "row": 2,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 8400,
+      "row": 3,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 9300,
+      "row": 4,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 10200,
+      "row": 0,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 11100,
+      "row": 1,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_3"
+    }
+  ],
+  "waves": [
+    {
+      "id": "wave_1",
+      "name": "第一波",
+      "start_tick": 1200,
+      "strength": 1
+    },
+    {
+      "id": "wave_2",
+      "name": "第二波",
+      "start_tick": 4800,
+      "strength": 1.5
+    },
+    {
+      "id": "wave_3",
+      "name": "最后一波",
+      "start_tick": 8400,
+      "strength": 2.2
+    }
   ]
 }

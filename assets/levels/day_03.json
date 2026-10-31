@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "id": "day_03",
+  "order": 3,
+  "name": "第 3 关 · 双向夹击",
+  "mode": "campaign",
+  "rows": 5,
+  "cols": 12,
+  "initial_sun": 125,
+  "sky_sun_interval_ticks": 720,
+  "sun_schedule": [],
+  "spawn_schedule": [
+    {
+      "tick": 1100,
+      "row": 0,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 1500,
+      "row": 1,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 1900,
+      "row": 2,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 2300,
+      "row": 3,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 2700,
+      "row": 4,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 3800,
+      "row": 4,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 4200,
+      "row": 2,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 4600,
+      "row": 0,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 5000,
+      "row": 3,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 5400,
+      "row": 1,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 5800,
+      "row": 4,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 7400,
+      "row": 0,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 7800,
+      "row": 2,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 8200,
+      "row": 4,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 8600,
+      "row": 1,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 9000,
+      "row": 3,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 9400,
+      "row": 0,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 9800,
+      "row": 2,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_3"
+    }
+  ],
+  "waves": [
+    {
+      "id": "wave_1",
+      "name": "第一波",
+      "start_tick": 1100,
+      "strength": 1
+    },
+    {
+      "id": "wave_2",
+      "name": "第二波",
+      "start_tick": 3800,
+      "strength": 1.8
+    },
+    {
+      "id": "wave_3",
+      "name": "最后一波",
+      "start_tick": 7400,
+      "strength": 2.7
+    }
+  ],
+  "star_goals": [
+    {
+      "id": "no_mower",
+      "kind": "mowers_used_at_most",
+      "threshold": 0,
+      "text": "不触发割草机"
+    },
+    {
+      "id": "sun_goal",
+      "kind": "sun_collected_at_least",
+      "threshold": 400,
+      "text": "本局收集至少 400 阳光"
+    }
+  ]
+}

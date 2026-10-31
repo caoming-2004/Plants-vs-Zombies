@@ -20,6 +20,7 @@ class Plant:
     hp: int
     next_action_tick: int
     action: str = "idle"
+    target_zombie_id: int | None = None
 
 
 @dataclass
@@ -32,6 +33,10 @@ class Zombie:
     next_bite_tick: int = 0
     target_plant_id: int | None = None
     action: str = "walking"
+    slow_until_tick: int = 0
+    slow_factor: float = 1.0
+    slow_bite_restore_tick: int | None = None
+    wave_id: str | None = None
 
 
 @dataclass
@@ -45,6 +50,8 @@ class Projectile:
     speed: float
     born_tick: int
     active: bool = True
+    slow_factor: float | None = None
+    slow_duration_ticks: int = 0
 
 
 @dataclass
@@ -56,6 +63,13 @@ class SunPickup:
     expires_tick: int
     born_tick: int
     collected: bool = False
+    source_kind: str = "plant"
+    start_x: float | None = None
+    start_y: float | None = None
+    target_x: float | None = None
+    target_y: float | None = None
+    motion_duration_ticks: int | None = None
+    arc_height: float = 0.0
 
 
 @dataclass

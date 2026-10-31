@@ -104,6 +104,81 @@ def test_biting_removes_plant_then_walks(game):
     assert z.x<before and z.action=="walking"
 
 
+def test_sun_falls_bobs_tracks_click_position_and_freezes_on_pause(game):
+    config,_=load()
+    x,y=420,260
+    sun=game.add_sun(x,y,25,'sky',start=(x,-28),motion_duration_ticks=60)
+    assert sun.y==-28
+    game.step()
+    assert -28<sun.y<y
+    game.tick=sun.born_tick+60
+    game.step()
+    assert y-3<sun.y<y+3
+    game.step([Command('Pause')])
+    paused=(sun.x,sun.y,game.tick)
+    game.step()
+    assert (sun.x,sun.y,game.tick)==paused
+    game.step([Command('Resume')])
+    point=(sun.x,sun.y)
+    command=click(point,game.snapshot(),config)
+    assert command.kind=='CollectSun'
+    before=game.sun
+    game.step([command])
+    assert game.sun==before+25 and sun.id not in game.suns
+    game.step([command])
+    assert game.sun==before+25
+
+
+def test_sun_expiry_remains_based_on_creation_tick(game):
+    sun=game.add_sun(300,200,25,'plant',start=(300,166),motion_duration_ticks=30)
+    expiry=sun.expires_tick
+    game.tick=expiry-1
+    game.step()
+    assert sun.id in game.suns
+    game.step()
+    assert sun.id not in game.suns
+
+
+def test_sunflower_sun_hops_from_visible_body_and_tracks_click(game):
+    from pvz_game.domain.models import Plant
+    from pvz_game.domain import systems
+    plant=Plant(game.new_id(),'sunflower',2,4,300,0)
+    game.plants[plant.id]=plant
+    game.step()
+    sun=next(s for s in game.suns.values() if s.source_kind=='plant')
+    body_y=game.row_y(plant.row)
+    assert sun.source_kind=='plant'
+    assert abs(sun.start_x-game.plant_x(plant))<40
+    assert body_y-80<=sun.start_y<=body_y+8
+    assert sun.arc_height>0
+    duration=sun.motion_duration_ticks
+    game.tick=sun.born_tick+duration//2
+    systems._update_suns(game,game.tick)
+    progress=.5;eased=1-(1-progress)**3
+    linear_y=sun.start_y+(sun.target_y-sun.start_y)*eased
+    assert sun.y < linear_y-sun.arc_height*.8
+    config,_=load()
+    command=click((sun.x,sun.y),game.snapshot(),config)
+    assert command is not None and command.kind=='CollectSun'
+    before=game.sun
+    game.step([command])
+    assert game.sun==before+sun.value and sun.id not in game.suns
+    game.step([command])
+    assert game.sun==before+sun.value
+
+
+def test_result_menu_button_returns_to_menu(game):
+    game.phase='won'
+    rect=BUTTONS['menu']
+    point=(rect[0]+rect[2]/2,rect[1]+rect[3]/2)
+    command=click(point,game.snapshot(),game.config)
+    assert command is not None and command.kind=='ReturnToMenu'
+    game.step([command])
+    assert game.phase=='menu'
+    assert not game.plants and not game.zombies and not game.suns
+    assert game.tick==0
+
+
 @pytest.mark.parametrize('role',['sunflower','peashooter','wallnut','jalapeno'])
 def test_click_and_drag_reach_same_planting_result(role):
     config,level=load()

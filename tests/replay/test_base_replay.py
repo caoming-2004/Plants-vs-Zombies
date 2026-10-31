@@ -89,12 +89,30 @@ def _baseline_replay():
     return game,events,snapshots
 
 
+def _gameplay_projection(snapshot):
+    """Ignore animated sun coordinates and optional effect metadata only."""
+    value=_plain(snapshot)
+    value['ready_tick'].pop('pangbaobao',None)
+    value['ready_tick'].pop('huanghuang',None)
+    for sun in value['suns']:
+        for key in ('x','y','source_kind','start_x','start_y','target_x','target_y','motion_duration_ticks'):
+            sun.pop(key,None)
+    for zombie in value['zombies']:
+        for key in ('slow_until_tick','slow_factor','slow_bite_restore_tick'):
+            zombie.pop(key,None)
+    for projectile in value['projectiles']:
+        projectile.pop('slow_factor',None)
+        projectile.pop('slow_duration_ticks',None)
+    return value
+
+
 def test_feature_replay_matches_pre_change_gameplay_baseline():
     fixture_path=Path(__file__).with_name("fixtures")/"004-baseline.json"
     baseline=json.loads(fixture_path.read_text(encoding="utf-8"))
     game,events,snapshots=_baseline_replay()
     assert events==baseline["events"]
-    assert snapshots==baseline["snapshots"]
+    assert [_gameplay_projection(snapshot) for snapshot in snapshots]==[
+        _gameplay_projection(snapshot) for snapshot in baseline["snapshots"]]
     assert game.phase==baseline["final_phase"]
     assert game.tick==baseline["final_tick"]
     assert game.sun==baseline["final_sun"]

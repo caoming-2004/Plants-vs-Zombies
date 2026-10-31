@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "id": "day_02",
+  "order": 2,
+  "name": "第 2 关 · 前院夜袭",
+  "mode": "campaign",
+  "rows": 5,
+  "cols": 12,
+  "initial_sun": 150,
+  "sky_sun_interval_ticks": 720,
+  "sun_schedule": [],
+  "spawn_schedule": [
+    {
+      "tick": 1200,
+      "row": 0,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 1600,
+      "row": 2,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 2000,
+      "row": 4,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 2400,
+      "row": 1,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_1"
+    },
+    {
+      "tick": 4200,
+      "row": 3,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 4600,
+      "row": 0,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 5000,
+      "row": 4,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 5400,
+      "row": 2,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 5800,
+      "row": 1,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_2"
+    },
+    {
+      "tick": 7800,
+      "row": 0,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 8200,
+      "row": 3,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 8600,
+      "row": 1,
+      "type_id": "zombie_tough",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 9000,
+      "row": 4,
+      "type_id": "zombie_fast",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 9400,
+      "row": 2,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_3"
+    },
+    {
+      "tick": 9800,
+      "row": 0,
+      "type_id": "zombie_basic",
+      "wave_id": "wave_3"
+    }
+  ],
+  "waves": [
+    {
+      "id": "wave_1",
+      "name": "第一波",
+      "start_tick": 1200,
+      "strength": 1
+    },
+    {
+      "id": "wave_2",
+      "name": "第二波",
+      "start_tick": 4200,
+      "strength": 1.6
+    },
+    {
+      "id": "wave_3",
+      "name": "最后一波",
+      "start_tick": 7800,
+      "strength": 2.4
+    }
+  ],
+  "star_goals": [
+    {
+      "id": "no_mower",
+      "kind": "mowers_used_at_most",
+      "threshold": 0,
+      "text": "不触发割草机"
+    },
+    {
+      "id": "fast_clear",
+      "kind": "clear_within_ticks",
+      "threshold": 16000,
+      "text": "在 267 秒内清场"
+    }
+  ]
+}

@@ -80,6 +80,8 @@ def main():
     parser.add_argument('--plant-skin',choices=('default','dogs','dogs_photo'),default='dogs')
     parser.add_argument('--zombie-skin',choices=('default','dogs'),default='dogs')
     parser.add_argument('--output',type=Path)
+    parser.add_argument('--baseline-average-fps',type=float,
+                        help='same-condition first-version standard loop FPS baseline')
     args=parser.parse_args()
     if args.seconds<=0:parser.error('--seconds must be positive')
     if args.input_latency:
@@ -97,6 +99,8 @@ def main():
         command=[sys.executable,'-m','pvz_game','--benchmark-scene',args.scene,
              '--seconds',str(args.seconds),'--benchmark-plant-skin',args.plant_skin,
              '--benchmark-zombie-skin',args.zombie_skin]
+        if args.baseline_average_fps is not None:
+            command.extend(['--baseline-average-fps',str(args.baseline_average_fps)])
         if args.output:command.extend(['--benchmark-output',str(args.output.resolve())])
         raise SystemExit(subprocess.run(command,cwd=ROOT).returncode)
     startup=cold_start_seconds()

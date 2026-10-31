@@ -7,7 +7,8 @@
   "source_refs": [
     "classic-reference-frames",
     "classic-ui-extracted",
-    "generated-classic-plants"
+    "generated-classic-plants",
+    "generated-background-006"
   ],
   "roles": {
     "sunflower": {
@@ -101,7 +102,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -130,7 +131,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -159,7 +160,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -188,7 +189,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -217,7 +218,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -246,7 +247,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -275,7 +276,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -304,7 +305,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -333,7 +334,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -362,7 +363,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -391,7 +392,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -420,7 +421,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -449,7 +450,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -478,7 +479,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -507,7 +508,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -536,7 +537,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -565,7 +566,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -594,7 +595,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -623,7 +624,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -652,7 +653,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -681,7 +682,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -710,7 +711,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -739,7 +740,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -768,7 +769,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -797,7 +798,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -826,7 +827,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -855,7 +856,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -884,7 +885,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -913,7 +914,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -942,7 +943,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -971,7 +972,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1000,7 +1001,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1029,7 +1030,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1058,7 +1059,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1087,7 +1088,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1116,7 +1117,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1145,7 +1146,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1174,7 +1175,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1203,7 +1204,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1232,7 +1233,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1261,7 +1262,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1290,7 +1291,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1319,7 +1320,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1348,7 +1349,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1377,7 +1378,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1406,7 +1407,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1435,7 +1436,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1464,7 +1465,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1493,7 +1494,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1522,7 +1523,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1551,7 +1552,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1580,7 +1581,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1609,7 +1610,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1638,7 +1639,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             }
           ]
         },
@@ -1672,7 +1673,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1701,7 +1702,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1730,7 +1731,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1759,7 +1760,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1788,7 +1789,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1817,7 +1818,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1846,7 +1847,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1875,7 +1876,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1904,7 +1905,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1933,7 +1934,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1962,7 +1963,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -1991,7 +1992,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2020,7 +2021,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2049,7 +2050,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2078,7 +2079,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2107,7 +2108,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2136,7 +2137,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2165,7 +2166,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2194,7 +2195,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2223,7 +2224,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2252,7 +2253,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2281,7 +2282,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2310,7 +2311,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2339,7 +2340,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2368,7 +2369,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2397,7 +2398,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2426,7 +2427,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2455,7 +2456,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2484,7 +2485,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2513,7 +2514,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2542,7 +2543,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2571,7 +2572,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2600,7 +2601,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2629,7 +2630,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2658,7 +2659,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2687,7 +2688,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2716,7 +2717,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2745,7 +2746,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2774,7 +2775,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2803,7 +2804,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2832,7 +2833,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2861,7 +2862,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2890,7 +2891,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2919,7 +2920,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2948,7 +2949,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -2977,7 +2978,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3006,7 +3007,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3035,7 +3036,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3064,7 +3065,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3093,7 +3094,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3122,7 +3123,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3151,7 +3152,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3180,7 +3181,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3209,7 +3210,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             }
           ]
         },
@@ -3548,7 +3549,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3577,7 +3578,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3606,7 +3607,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3635,7 +3636,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3664,7 +3665,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3693,7 +3694,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3722,7 +3723,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3751,7 +3752,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3780,7 +3781,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3809,7 +3810,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3838,7 +3839,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3867,7 +3868,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3896,7 +3897,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3925,7 +3926,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3954,7 +3955,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -3983,7 +3984,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4012,7 +4013,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4041,7 +4042,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4070,7 +4071,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4099,7 +4100,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4128,7 +4129,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4157,7 +4158,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4186,7 +4187,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4215,7 +4216,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4244,7 +4245,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4273,7 +4274,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4302,7 +4303,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4331,7 +4332,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4360,7 +4361,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4389,7 +4390,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4418,7 +4419,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4447,7 +4448,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4476,7 +4477,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4505,7 +4506,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4534,7 +4535,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4563,7 +4564,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4592,7 +4593,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4621,7 +4622,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4650,7 +4651,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             }
           ]
         },
@@ -4684,7 +4685,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4713,7 +4714,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4742,7 +4743,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4771,7 +4772,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4800,7 +4801,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4829,7 +4830,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4858,7 +4859,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4887,7 +4888,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4916,7 +4917,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4945,7 +4946,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -4974,7 +4975,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5003,7 +5004,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5032,7 +5033,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5061,7 +5062,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5090,7 +5091,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5119,7 +5120,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5148,7 +5149,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5177,7 +5178,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5206,7 +5207,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5235,7 +5236,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5264,7 +5265,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5293,7 +5294,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5322,7 +5323,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5351,7 +5352,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5380,7 +5381,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5409,7 +5410,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5438,7 +5439,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5467,7 +5468,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5496,7 +5497,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5525,7 +5526,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5554,7 +5555,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5583,7 +5584,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5612,7 +5613,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5641,7 +5642,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5670,7 +5671,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5699,7 +5700,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5728,7 +5729,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5757,7 +5758,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -5786,7 +5787,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             }
           ]
         },
@@ -12385,7 +12386,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12414,7 +12415,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12443,7 +12444,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12472,7 +12473,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12501,7 +12502,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12530,7 +12531,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12559,7 +12560,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12588,7 +12589,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12617,7 +12618,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12646,7 +12647,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12675,7 +12676,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12704,7 +12705,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12733,7 +12734,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12762,7 +12763,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12791,7 +12792,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12820,7 +12821,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12849,7 +12850,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12878,7 +12879,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12907,7 +12908,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12936,7 +12937,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12965,7 +12966,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -12994,7 +12995,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -13023,7 +13024,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -13052,7 +13053,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             }
           ]
         },
@@ -14058,7 +14059,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14087,7 +14088,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14116,7 +14117,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14145,7 +14146,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14174,7 +14175,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14203,7 +14204,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14232,7 +14233,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14261,7 +14262,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14290,7 +14291,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14319,7 +14320,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14348,7 +14349,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14377,7 +14378,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14406,7 +14407,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14435,7 +14436,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14464,7 +14465,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14493,7 +14494,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14522,7 +14523,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14551,7 +14552,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14580,7 +14581,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14609,7 +14610,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14638,7 +14639,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14667,7 +14668,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14696,7 +14697,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             },
             {
               "rect": [
@@ -14725,7 +14726,7 @@
                 76,
                 116
               ],
-              "duration_ticks": 4
+              "duration_ticks": 5
             }
           ]
         },
@@ -16725,7 +16726,7 @@
     }
   },
   "ui": {
-    "background": "ui-background.jpg",
+    "background": "ui-background.png",
     "menu": {
       "rect": [
         0,
